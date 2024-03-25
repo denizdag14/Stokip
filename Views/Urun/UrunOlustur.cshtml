@@ -1,0 +1,82 @@
+﻿@using POStock.Models.Entity
+@model List<KATEGORI>
+@{
+    ViewBag.Title = "UrunOlustur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-group" method="post" style="width:80%; margin:auto">
+
+    <div class="input-group mb-3">
+
+        <span class="input-group-text">Ürün Adı: </span>
+        <input type="text" class="form-control" name="UrunAd" />
+
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Ürün Kategorisi: </span>
+        <select class="form-select" name="UrunKategori">
+            @foreach (var kat in Model)
+            {
+                if (kat.IsActive == true)
+                {
+                    <option value="@kat.KategoriID">@kat.KategoriAd</option>
+                }
+            }
+        </select>
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#katEkle">Kategori Ekle</button>
+    </div>
+
+    <div>
+
+        <button class="btn btn-info">Ürün Ekle</button>
+
+    </div>
+
+</form>
+
+<div class="modal fade" id="katEkle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Kategori Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" action="@Url.Action("KategoriOlustur2", "Kategori")">
+
+                    <input type="hidden" id="katId" name="KategoriID">
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="katAdi">Kategori Adı:</label></span>
+                        <input type="text" class="form-control" id="katAdi" name="KategoriAd">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" id="btnSave" class="btn btn-success">Kaydet</button>
+                    </div>
+
+                </form>
+
+            </div>           
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#katEkle').keypress(function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                $("#btnSave").click();
+            }
+        })
+
+    })
+
+</script>

@@ -1,0 +1,152 @@
+﻿@using POStock.Models.Entity
+@model List<MUSTERI>
+@{
+    ViewBag.Title = "MusteriIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center"><h3><b>MÜŞTERİLER</b></h3></div>
+
+<div class="container">
+
+    <table class="table table-hover table-responsive" style="width:100%" id="myTable">
+
+        <thead>
+            <tr style="text-align:center">
+                <th>#</th>
+                <th>Müşteri Adı ve Soyadı</th>
+                <th>Güncelle</th>
+                <th>Sil</th>
+            </tr>
+        </thead>
+        <tbody class="table table-group-divider">
+
+            @{
+                // Aktif ürünler için ayrı bir sayacı takip et
+                int aktifSayac = 1;
+            }
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                if (Model[i].IsActive == true)
+                {
+                    <tr style="text-align:center">
+                        <td><b>@aktifSayac</b></td>
+                        <td style="text-align:left;">@Model[i].MusteriAd @Model[i].MusteriSoyad</td>
+                        <td><button data-id="@Model[i].MusteriID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#musteriGuncelle">Güncelle</button></td>
+                        <td><a class="btn btn-danger" href="@Url.Action("MusteriSil", "Musteri", new {id = Model[i].MusteriID})" onclick="return confirmDelete()">Sil</a></td>
+                    </tr>
+                    aktifSayac++;
+                }
+            }
+        </tbody>
+
+    </table>
+    <a class="btn btn-success" href="@Url.Action("MusteriOlustur", "Musteri")">Yeni Müşteri</a>
+
+</div>
+
+<div class="modal fade" id="musteriGuncelle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Müşteri Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="musteriGuncelleForm">
+
+                    <input type="hidden" id="musteriId" name="MusteriID">
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="musteriAdi">Müşteri Adı:</label></span>
+                        <input type="text" class="form-control" id="musteriAdi" name="MusteriAd">
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="musteriSoyadi">Müşteri Soyadı:</label></span>
+                        <input type="text" class="form-control" id="musteriSoyadi" name="MusteriSoyad">
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" id="btnSave" class="btn btn-success">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "columnDefs": [
+                { "width": "10px", "targets": 0 },
+                { "width": "20px", "targets": 2 },
+                { "width": "20px", "targets": 3 },
+            ],
+            "colReorder": true,
+            "lengthMenu": [5, 10, 25, 50, 100],
+            "pageLength": 5
+        });
+
+        $('.btn-guncelle').click(function () {
+            var musteriId = $(this).data('id');
+
+            // Ajax isteği yaparak ürün bilgilerini al
+            $.ajax({
+                url: '/Musteri/MusteriBilgisiniGetir', // Sunucuda bu adrese sahip bir metot olmalı
+                type: 'GET',
+                data: { id: musteriId },
+                success: function (data) {
+                    $('#musteriId').val(data.MusteriID);
+                    $('#musteriAdi').val(data.MusteriAd);
+                    $('#musteriSoyadi').val(data.MusteriSoyad);
+
+                    $('#musteriGuncelle').modal('show');
+                },
+                error: function () {
+                    alert('Müşteri bilgileri alınamadı.');
+                }
+            });
+        });
+
+        // Kaydet butonuna tıklanınca
+        $('#btnSave').click(function () {
+            var formData = new FormData($('#musteriGuncelleForm')[0]);
+
+            // Ajax isteği yaparak form verilerini sunucuya gönder
+            $.ajax({
+                url: '/Musteri/MusteriGuncelle', // Sunucuda bu adrese sahip bir metot olmalı
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    // Başarılı ise modalı kapat ve sayfayı yenile
+                    $('#musteriGuncelle').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Müşteri güncellenemedi.');
+                }
+            });
+        });
+
+        $('#musteriGuncelle').keypress(function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                $("#btnSave").click();
+            }
+        })
+
+    });
+
+    function confirmDelete() {
+        var userConfirmed = confirm('Silme işlemi gerçekleştirilsin mi?');
+        return userConfirmed;
+    }
+
+</script>

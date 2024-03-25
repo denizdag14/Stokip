@@ -1,0 +1,177 @@
+﻿@using POStock.Models.Entity
+@model List<URUN>
+@{
+    ViewBag.Title = "UrunIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center"><h3><b>ÜRÜNLER</b></h3></div>
+
+<div class="container">
+
+    <table class="table table-hover" style="width:100%; text-align:left" id="myTable">
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ürün Adı</th>
+                <th>Ürün Kategorisi</th>
+                <th>Stok</th>
+                <th>Güncelle</th>
+                <th>Sil</th>
+            </tr>
+        </thead>
+        <tbody class="table table-group-divider">
+
+            @{
+                // Aktif ürünler için ayrı bir sayacı takip et
+                int aktifSayac = 1;
+            }
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                if (Model[i].IsActive == false)
+                {
+                    continue;
+                }
+                else
+                {
+                    <tr style="text-align:center">
+                        <td><b>@aktifSayac</b></td>
+                        <td style="text-align:left">@Model[i].UrunAd</td>
+                        <td style="text-align:left">@Model[i].KATEGORI.KategoriAd</td>
+                        <td>@Model[i].Stok</td>
+                        <td><button data-id="@Model[i].UrunID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#urunGuncelle">Güncelle</button></td>
+                        <td><a class="btn btn-outline-danger" href="@Url.Action("UrunSil", "Urun", new { id = Model[i].UrunID })" onclick="return confirmDelete()">Sil</a></td>
+                    </tr>
+                }
+                aktifSayac++;
+            }
+        </tbody>
+
+    </table>
+    <a class="btn btn-success" href="@Url.Action("UrunOlustur", "Urun")">Yeni Ürün</a>
+
+</div>
+
+<div class="modal fade" id="urunGuncelle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ürün Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="urunGuncelleForm">
+
+                    <input type="hidden" id="urunId" name="UrunID">
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="urunAdi">Ürün Adı:</label></span>
+                        <input type="text" class="form-control" id="urunAdi" name="UrunAd">
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="kategori">Ürün Kategorisi:</label></span>
+                        <select class="form-select" id="kategori" name="UrunKategori">
+                            @foreach (var kat in ViewBag.katList)
+                            {
+                                if (kat.IsActive == true)
+                                {
+                                    <option value="@kat.KategoriID">@kat.KategoriAd</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="stok">Stok:</label></span>
+                        <input type="number" class="form-control" id="stok" name="Stok">
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" id="btnSave" class="btn btn-success">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "columnDefs": [
+                { "width": "10px", "targets": 0 },
+                { "width": "20px", "targets": 4 },
+                { "width": "20px", "targets": 5 },
+            ],
+            "colReorder": true,
+            "lengthMenu": [5, 10, 25, 50, 100],
+            "pageLength": 5
+        });
+
+        $('.btn-guncelle').click(function () {
+            var urunId = $(this).data('id');
+
+            // Ajax isteği yaparak ürün bilgilerini al
+            $.ajax({
+                url: '/Urun/UrunBilgisiniGetir', // Sunucuda bu adrese sahip bir metot olmalı
+                type: 'GET',
+                data: { id: urunId },
+                success: function (data) {
+                    $('#urunId').val(data.UrunID);
+                    $('#urunAdi').val(data.UrunAd);
+
+                    // Seçili kategoriyi ayarla
+                    $('#kategori').val(data.seciliKat);
+
+                    // Stok bilgisini de modal içerisine ekleyin
+                    $('#stok').val(data.Stok);
+
+                    $('#urunGuncelle').modal('show');
+                },
+                error: function () {
+                    alert('Ürün bilgileri alınamadı.');
+                }
+            });
+        });
+
+        // Kaydet butonuna tıklanınca
+        $('#btnSave').click(function () {
+            var formData = new FormData($('#urunGuncelleForm')[0]);
+
+            // Ajax isteği yaparak form verilerini sunucuya gönder
+            $.ajax({
+                url: '/Urun/UrunGuncelle', // Sunucuda bu adrese sahip bir metot olmalı
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    // Başarılı ise modalı kapat ve sayfayı yenile
+                    $('#urunGuncelle').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Ürün güncellenemedi.');
+                }
+            });
+        });
+
+        $('#urunGuncelle').keypress(function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                $("#btnSave").click();
+            }
+        })
+
+    });
+
+    function confirmDelete() {
+        var userConfirmed = confirm('Silme işlemi gerçekleştirilsin mi?');
+        return userConfirmed;
+    }
+
+</script>

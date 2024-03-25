@@ -1,0 +1,59 @@
+﻿@using POStock.Models.Entity
+@model List<ALIS>
+@{
+    ViewBag.Title = "AlisIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center"><h3><b>ALIŞLAR</b></h3></div>
+
+<div class="container">
+
+    <table class="table table-hover" style="width:100%;" id="myTable">
+
+        <thead>
+            <tr style="text-align:center">
+                <th>#</th>
+                <th>Ürün Adı</th>
+                <th>Ürün Kategorisi</th>
+                <th>Adet</th>
+                <th>Toplam Fiyat</th>
+                <th>Birim Fiyat</th>
+            </tr>
+        </thead>
+        <tbody class="table table-group-divider">
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr style="text-align:center">
+                    <td><b>@(i + 1)</b></td>
+                    <td style="text-align:left">@Model[i].URUN1.UrunAd</td>
+                    <td style="text-align:left">@Model[i].URUN1.KATEGORI.KategoriAd</td>
+                    <td>@Model[i].Adet</td>
+                    <td style="text-align:right">@Model[i].ToplamFiyat ₺</td>
+                    <td style="text-align:right">@Model[i].BirimFiyat ₺</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <a class="btn btn-success" href="@Url.Action("AlisOlustur", "Alis")">Yeni Alış</a>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "columnDefs": [
+                { "width": "10px", "targets": 0 },
+                { "width": "20px", "targets": 5 },
+                { "width": "20px", "targets": 6 },
+            ],
+            "colReorder": true,
+            "lengthMenu": [5, 10, 25, 50, 100],
+            "pageLength": 5
+        });
+    });
+
+</script>
