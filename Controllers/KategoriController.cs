@@ -18,11 +18,11 @@ namespace POStock.Controllers
             return View(kategoriList);
         }
 
-        [HttpGet]
-        public ActionResult KategoriOlustur()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult KategoriOlustur()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public ActionResult KategoriOlustur(KATEGORI kat)

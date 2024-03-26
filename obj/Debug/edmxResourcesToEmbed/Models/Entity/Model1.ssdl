@@ -4,8 +4,8 @@
     <Key>
       <PropertyRef Name="AlisID" />
     </Key>
-    <Property Name="AlisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Urun" Type="int" />
+    <Property Name="AlisID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Urun" Type="smallint" />
     <Property Name="Adet" Type="int" />
     <Property Name="BirimFiyat" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ToplamFiyat" Type="decimal" Precision="18" Scale="2" />
@@ -23,7 +23,7 @@
     <Key>
       <PropertyRef Name="MusteriID" />
     </Key>
-    <Property Name="MusteriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MusteriAd" Type="varchar" MaxLength="50" />
     <Property Name="MusteriSoyad" Type="varchar" MaxLength="50" />
     <Property Name="IsActive" Type="bit" />
@@ -32,9 +32,9 @@
     <Key>
       <PropertyRef Name="SatisID" />
     </Key>
-    <Property Name="SatisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Urun" Type="int" />
-    <Property Name="Musteri" Type="int" />
+    <Property Name="SatisID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Urun" Type="smallint" />
+    <Property Name="Musteri" Type="smallint" />
     <Property Name="Adet" Type="int" />
     <Property Name="BirimFiyat" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ToplamFiyat" Type="decimal" Precision="18" Scale="2" />
@@ -54,7 +54,7 @@
     <Key>
       <PropertyRef Name="UrunID" />
     </Key>
-    <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrunID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UrunAd" Type="varchar" MaxLength="50" />
     <Property Name="UrunKategori" Type="smallint" />
     <Property Name="Stok" Type="smallint" />

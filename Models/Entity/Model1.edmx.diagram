@@ -11,10 +11,10 @@
         <EntityTypeShape EntityType="DbStockModel.SATIS" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DbStockModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DbStockModel.URUN" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <AssociationConnector Association="DbStockModel.FK_ALIS_URUN" ManuallyRouted="false" />
+        <AssociationConnector Association="DbStockModel.FK_ALIS_URUN1" ManuallyRouted="false" />
         <AssociationConnector Association="DbStockModel.FK_URUN_KATEGORI" ManuallyRouted="false" />
-        <AssociationConnector Association="DbStockModel.FK_SATIS_MUSTERI" ManuallyRouted="false" />
-        <AssociationConnector Association="DbStockModel.FK_SATIS_URUN" ManuallyRouted="false" />
+        <AssociationConnector Association="DbStockModel.FK_SATIS_MUSTERI1" ManuallyRouted="false" />
+        <AssociationConnector Association="DbStockModel.FK_SATIS_URUN1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

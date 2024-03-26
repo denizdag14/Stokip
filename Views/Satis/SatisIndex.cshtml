@@ -1,5 +1,4 @@
 ﻿@using POStock.Models.Entity
-@model List<SATIS>
 @{
     ViewBag.Title = "SatisIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,30 +17,90 @@
                 <th>Ürün Kategorisi</th>
                 <th>Müşteri</th>
                 <th>Adet</th>
-                <th>Toplam Fiyat</th>
                 <th>Birim Fiyat</th>
+                <th>Toplam Fiyat</th>
             </tr>
         </thead>
         <tbody class="table table-group-divider">
 
-            @for (int i = 0; i < Model.Count; i++)
+            @for (int i = 0; i < ViewBag.satisList.Count; i++)
             {
                 <tr style="text-align:center">
                     <td><b>@(i + 1)</b></td>
-                    <td style="text-align:left;">@Model[i].URUN1.UrunAd</td>
-                    <td style="text-align:left">@Model[i].URUN1.KATEGORI.KategoriAd</td>
-                    <td style="text-align:left;">@Model[i].MUSTERI1.MusteriAd @Model[i].MUSTERI1.MusteriSoyad</td>
-                    <td>@Model[i].Adet</td>
-                    <td style="text-align:right">@Model[i].ToplamFiyat ₺</td>
-                    <td style="text-align:right">@Model[i].BirimFiyat ₺</td>
+                    <td style="text-align:left;">@ViewBag.satisList[i].URUN.UrunAd</td>
+                    <td style="text-align:left">@ViewBag.satisList[i].URUN.KATEGORI.KategoriAd</td>
+                    <td style="text-align:left;">@ViewBag.satisList[i].MUSTERI.MusteriAd @ViewBag.satisList[i].MUSTERI.MusteriSoyad</td>
+                    <td>@ViewBag.satisList[i].Adet</td>
+                    <td style="text-align:right">@ViewBag.satisList[i].BirimFiyat ₺</td>
+                    <td style="text-align:right">@ViewBag.satisList[i].ToplamFiyat ₺</td>
                 </tr>
             }
         </tbody>
 
     </table>
+    @*<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#satisEkle">Yeni Satış</button>*@
     <a class="btn btn-success" href="@Url.Action("SatisOlustur", "Satis")">Yeni Satış</a>
 
 </div>
+
+@*<div class="modal fade" id="satisEkle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Satış Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" action="@Url.Action("SatisOlustur", "Satis")">
+
+                    <input type="hidden" id="satisId" name="SatisID">
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="urun">Ürün:</label></span>
+                        <select class="form-select" id="urun" name="URUN">
+                            @foreach (var item in ViewBag.urunList)
+                            {
+                                if (item.IsActive == true)
+                                {
+                                    <option value="@item.UrunID">@item.UrunAd</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="musteri">Müşteri:</label></span>
+                        <select class="form-select" id="musteri" name="MUSTERI">
+                            @foreach (var item in ViewBag.musteriList)
+                            {
+                                if (item.IsActive == true)
+                                {
+                                    <option value="@item.MusteriID">@item.MusteriAd @item.MusteriSoyad</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="adet">Adet:</label></span>
+                        <input type="number" class="form-control" id="adet" name="Adet">
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="toplamFiyat">Toplam Fiyat:</label></span>
+                        <input type="number" class="form-control" id="toplamFiyat" name="ToplamFiyat">
+                        <span class="input-group-text">₺</span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" id="btnSave" class="btn btn-success">Kaydet</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>*@
 
 <script>
 
@@ -49,8 +108,6 @@
         $('#myTable').DataTable({
             "columnDefs": [
                 { "width": "10px", "targets": 0 },
-                { "width": "20px", "targets": 6 },
-                { "width": "20px", "targets": 7 },
             ],
             "colReorder": true,
             "lengthMenu": [5, 10, 25, 50, 100],

@@ -4,12 +4,12 @@
     <Key>
       <PropertyRef Name="AlisID" />
     </Key>
-    <Property Name="AlisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Urun" Type="Int32" />
+    <Property Name="AlisID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Urun" Type="Int16" />
     <Property Name="Adet" Type="Int32" />
     <Property Name="BirimFiyat" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="ToplamFiyat" Type="Decimal" Precision="18" Scale="2" />
-    <NavigationProperty Name="URUN1" Relationship="Self.FK_ALIS_URUN" FromRole="ALIS" ToRole="URUN" />
+    <NavigationProperty Name="URUN" Relationship="DbStockModel.FK_ALIS_URUN1" FromRole="ALIS" ToRole="URUN" />
     <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityType Name="KATEGORI">
@@ -25,24 +25,24 @@
     <Key>
       <PropertyRef Name="MusteriID" />
     </Key>
-    <Property Name="MusteriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MusteriID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MusteriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="MusteriSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="SATIS" Relationship="Self.FK_SATIS_MUSTERI" FromRole="MUSTERI" ToRole="SATIS" />
+    <NavigationProperty Name="SATIS" Relationship="DbStockModel.FK_SATIS_MUSTERI1" FromRole="MUSTERI" ToRole="SATIS" />
     <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityType Name="SATIS">
     <Key>
       <PropertyRef Name="SatisID" />
     </Key>
-    <Property Name="SatisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Urun" Type="Int32" />
-    <Property Name="Musteri" Type="Int32" />
+    <Property Name="SatisID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Urun" Type="Int16" />
+    <Property Name="Musteri" Type="Int16" />
     <Property Name="Adet" Type="Int32" />
     <Property Name="BirimFiyat" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="ToplamFiyat" Type="Decimal" Precision="18" Scale="2" />
-    <NavigationProperty Name="MUSTERI1" Relationship="Self.FK_SATIS_MUSTERI" FromRole="SATIS" ToRole="MUSTERI" />
-    <NavigationProperty Name="URUN1" Relationship="Self.FK_SATIS_URUN" FromRole="SATIS" ToRole="URUN" />
+    <NavigationProperty Name="MUSTERI" Relationship="DbStockModel.FK_SATIS_MUSTERI1" FromRole="SATIS" ToRole="MUSTERI" />
+    <NavigationProperty Name="URUN" Relationship="DbStockModel.FK_SATIS_URUN1" FromRole="SATIS" ToRole="URUN" />
     <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -59,16 +59,16 @@
     <Key>
       <PropertyRef Name="UrunID" />
     </Key>
-    <Property Name="UrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UrunKategori" Type="Int16" />
     <Property Name="Stok" Type="Int16" />
-    <NavigationProperty Name="ALIS" Relationship="Self.FK_ALIS_URUN" FromRole="URUN" ToRole="ALIS" />
+    <NavigationProperty Name="ALIS" Relationship="DbStockModel.FK_ALIS_URUN1" FromRole="URUN" ToRole="ALIS" />
     <NavigationProperty Name="KATEGORI" Relationship="Self.FK_URUN_KATEGORI" FromRole="URUN" ToRole="KATEGORI" />
-    <NavigationProperty Name="SATIS" Relationship="Self.FK_SATIS_URUN" FromRole="URUN" ToRole="SATIS" />
+    <NavigationProperty Name="SATIS" Relationship="DbStockModel.FK_SATIS_URUN1" FromRole="URUN" ToRole="SATIS" />
     <Property Name="IsActive" Type="Boolean" />
   </EntityType>
-  <Association Name="FK_ALIS_URUN">
+  <Association Name="FK_ALIS_URUN1">
     <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
     <End Role="ALIS" Type="Self.ALIS" Multiplicity="*" />
     <ReferentialConstraint>
@@ -92,7 +92,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SATIS_MUSTERI">
+  <Association Name="FK_SATIS_MUSTERI1">
     <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="0..1" />
     <End Role="SATIS" Type="Self.SATIS" Multiplicity="*" />
     <ReferentialConstraint>
@@ -104,7 +104,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SATIS_URUN">
+  <Association Name="FK_SATIS_URUN1">
     <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
     <End Role="SATIS" Type="Self.SATIS" Multiplicity="*" />
     <ReferentialConstraint>
@@ -123,7 +123,7 @@
     <EntitySet Name="SATIS" EntityType="Self.SATIS" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="URUN" EntityType="Self.URUN" />
-    <AssociationSet Name="FK_ALIS_URUN" Association="Self.FK_ALIS_URUN">
+    <AssociationSet Name="FK_ALIS_URUN" Association="DbStockModel.FK_ALIS_URUN1">
       <End Role="URUN" EntitySet="URUN" />
       <End Role="ALIS" EntitySet="ALIS" />
     </AssociationSet>
@@ -131,11 +131,11 @@
       <End Role="KATEGORI" EntitySet="KATEGORI" />
       <End Role="URUN" EntitySet="URUN" />
     </AssociationSet>
-    <AssociationSet Name="FK_SATIS_MUSTERI" Association="Self.FK_SATIS_MUSTERI">
+    <AssociationSet Name="FK_SATIS_MUSTERI" Association="DbStockModel.FK_SATIS_MUSTERI1">
       <End Role="MUSTERI" EntitySet="MUSTERI" />
       <End Role="SATIS" EntitySet="SATIS" />
     </AssociationSet>
-    <AssociationSet Name="FK_SATIS_URUN" Association="Self.FK_SATIS_URUN">
+    <AssociationSet Name="FK_SATIS_URUN" Association="DbStockModel.FK_SATIS_URUN1">
       <End Role="URUN" EntitySet="URUN" />
       <End Role="SATIS" EntitySet="SATIS" />
     </AssociationSet>
