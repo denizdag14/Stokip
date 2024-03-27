@@ -14,15 +14,22 @@ namespace POStock.Controllers
 
         public ActionResult MainIndex()
         {
-            return View();
+            var urunList = db.URUN.ToList();
+            var musteriList = db.MUSTERI.ToList();
+            ViewBag.urunList = urunList;
+            ViewBag.musteriList = musteriList;
+            var satisList = db.SATIS.ToList();
+            ViewBag.satisList = satisList;
+            var alisList = db.ALIS.ToList();
+            return View(alisList);
         }
 
         public JsonResult GetSalesData()
         {
             var salesData = db.SATIS
                 .Where(s => s.URUN.IsActive == true)
-                .GroupBy(s => s.Urun)
-                .Select(g => new { ProductName = g.Key, TotalQuantity = g.Sum(s => s.Adet) })
+                .GroupBy(a => new { a.Urun, a.URUN.UrunAd })
+                .Select(g => new { ProductName = g.Key.UrunAd, TotalQuantity = g.Sum(a => a.Adet) })
                 .ToList();
 
             return Json(salesData, JsonRequestBehavior.AllowGet);
@@ -31,9 +38,9 @@ namespace POStock.Controllers
         public JsonResult GetPurchasesData()
         {
             var purchasesData = db.ALIS
-                 .Where(a => a.URUN.IsActive == true)
-                .GroupBy(a => a.Urun)
-                .Select(g => new { ProductName = g.Key, TotalQuantity = g.Sum(a => a.Adet) })
+                .Where(a => a.URUN.IsActive == true)
+                .GroupBy(a => new { a.Urun, a.URUN.UrunAd })
+                .Select(g => new { ProductName = g.Key.UrunAd, TotalQuantity = g.Sum(a => a.Adet) })
                 .ToList();
 
             return Json(purchasesData, JsonRequestBehavior.AllowGet);

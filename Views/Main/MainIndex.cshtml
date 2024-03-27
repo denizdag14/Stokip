@@ -1,11 +1,102 @@
-﻿
+﻿@model List<POStock.Models.Entity.ALIS>
 @{
     ViewBag.Title = "MainIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="salesPieChart" style="width: 500px; height: 300px;"></div>
-<div id="purchasesPieChart" style="width: 500px; height: 300px;"></div>
+<div class="container">
+    <div class="row shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="col-md-6">
+            <div id="salesPieChart"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="purchasesPieChart"></div>
+        </div>
+    </div>
+    <div class="row shadow-lg p-3 mb-5 bg-body rounded">
+        <div style="text-align:center"><h3><b>SATIŞLAR</b></h3></div>
+        <div class="col-md-12">
+            <table class="table table-hover" style="width:100%;" id="myTable">
+
+                <thead>
+                    <tr style="text-align:center">
+                        <th>#</th>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Kategorisi</th>
+                        <th>Müşteri</th>
+                        <th>Adet</th>
+                        <th>Birim Fiyat</th>
+                        <th>Toplam Fiyat</th>
+                    </tr>
+                </thead>
+                <tbody class="table table-group-divider">
+
+                    @{
+                        int sayac = 1;
+                    }
+
+                    @for (int i = ViewBag.satisList.Count - 1; i >= 0; i--)
+                    {
+
+                        <tr style="text-align:center">
+                            <td><b>@sayac</b></td>
+                            <td style="text-align:left;">@ViewBag.satisList[i].URUN.UrunAd</td>
+                            <td style="text-align:left">@ViewBag.satisList[i].URUN.KATEGORI.KategoriAd</td>
+                            <td style="text-align:left;">@ViewBag.satisList[i].MUSTERI.MusteriAd @ViewBag.satisList[i].MUSTERI.MusteriSoyad</td>
+                            <td>@ViewBag.satisList[i].Adet</td>
+                            <td style="text-align:right">@ViewBag.satisList[i].BirimFiyat ₺</td>
+                            <td style="text-align:right">@ViewBag.satisList[i].ToplamFiyat ₺</td>
+
+                        </tr>
+                        sayac++;
+
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="row shadow-lg p-3 mb-5 bg-body rounded">
+        <div style="text-align:center"><h3><b>ALIŞLAR</b></h3></div>
+        <div class="col-md-12">
+            <table class="table table-hover" style="width:100%;" id="myTable2">
+
+                <thead>
+                    <tr style="text-align:center">
+                        <th>#</th>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Kategorisi</th>
+                        <th>Adet</th>
+                        <th>Birim Fiyat</th>
+                        <th>Toplam Fiyat</th>
+                    </tr>
+                </thead>
+                <tbody class="table table-group-divider">
+
+                    @{
+                        int sayac2 = 1;
+                    }
+
+                    @for (int i = Model.Count - 1; i >= 0; i--)
+                    {
+
+                        <tr style="text-align:center">
+                            <td><b>@sayac2</b></td>
+                            <td style="text-align:left">@Model[i].URUN.UrunAd</td>
+                            <td style="text-align:left">@Model[i].URUN.KATEGORI.KategoriAd</td>
+                            <td>@Model[i].Adet</td>
+                            <td style="text-align:right">@Model[i].BirimFiyat ₺</td>
+                            <td style="text-align:right">@Model[i].ToplamFiyat ₺</td>
+                        </tr>
+                        sayac2++;
+
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -49,7 +140,7 @@
         var salesChartDataTable = google.visualization.arrayToDataTable(salesChartData);
 
         var salesChartOptions = {
-            title: 'Ürün Satış Miktarları'
+            title: 'Ürün Satış Miktarları',
         };
 
         var salesChart = new google.visualization.PieChart(document.getElementById('salesPieChart'));
@@ -65,10 +156,32 @@
         var purchasesChartDataTable = google.visualization.arrayToDataTable(purchasesChartData);
 
         var purchasesChartOptions = {
-            title: 'Ürün Alış Miktarları'
+            title: 'Ürün Alış Miktarları',
         };
 
         var purchasesChart = new google.visualization.PieChart(document.getElementById('purchasesPieChart'));
         purchasesChart.draw(purchasesChartDataTable, purchasesChartOptions);
     }
+
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "columnDefs": [
+                { "width": "10px", "targets": 0 },
+            ],
+            "colReorder": true,
+            "lengthMenu": [5, 10, 25, 50, 100],
+            "pageLength": 5
+        });
+
+        $('#myTable2').DataTable({
+            "columnDefs": [
+                { "width": "10px", "targets": 0 },
+            ],
+            "colReorder": true,
+            "lengthMenu": [5, 10, 25, 50, 100],
+            "pageLength": 5
+        });
+
+    });
+
 </script>

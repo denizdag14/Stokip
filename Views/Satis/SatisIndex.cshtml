@@ -45,7 +45,9 @@
                     }
                     else
                     {
-                        <td><a class="btn btn-outline-danger disabled">Sil</a></td>
+                    <td>
+                        <a class="btn btn-outline-danger disabled">Sil</a>
+                    </td>
                     }
 
                 </tr>
@@ -124,7 +126,7 @@
         $('#myTable').DataTable({
             "columnDefs": [
                 { "width": "10px", "targets": 0 },
-                {"width": "20px", "targets": 7},
+                { "width": "20px", "targets": 7 },
             ],
             "colReorder": true,
             "lengthMenu": [5, 10, 25, 50, 100],
