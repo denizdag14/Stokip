@@ -24,11 +24,10 @@
         <tbody class="table table-group-divider">
 
             @{
-                // Aktif ürünler için ayrı bir sayacı takip et
                 int aktifSayac = 1;
             }
 
-            @for (int i = 0; i < Model.Count; i++)
+            @for (int i = Model.Count - 1; i >= 0; i--)
             {
                 if (Model[i].IsActive == false)
                 {
@@ -115,19 +114,16 @@
         $('.btn-guncelle').click(function () {
             var urunId = $(this).data('id');
 
-            // Ajax isteği yaparak ürün bilgilerini al
             $.ajax({
-                url: '/Urun/UrunBilgisiniGetir', // Sunucuda bu adrese sahip bir metot olmalı
+                url: '/Urun/UrunBilgisiniGetir',
                 type: 'GET',
                 data: { id: urunId },
                 success: function (data) {
                     $('#urunId').val(data.UrunID);
                     $('#urunAdi').val(data.UrunAd);
 
-                    // Seçili kategoriyi ayarla
                     $('#kategori').val(data.seciliKat);
 
-                    // Stok bilgisini de modal içerisine ekleyin
                     $('#stok').val(data.Stok);
 
                     $('#urunGuncelle').modal('show');
@@ -138,19 +134,16 @@
             });
         });
 
-        // Kaydet butonuna tıklanınca
         $('#btnSave').click(function () {
             var formData = new FormData($('#urunGuncelleForm')[0]);
 
-            // Ajax isteği yaparak form verilerini sunucuya gönder
             $.ajax({
-                url: '/Urun/UrunGuncelle', // Sunucuda bu adrese sahip bir metot olmalı
+                url: '/Urun/UrunGuncelle',
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function () {
-                    // Başarılı ise modalı kapat ve sayfayı yenile
                     $('#urunGuncelle').modal('hide');
                     location.reload();
                 },

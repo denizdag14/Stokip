@@ -18,12 +18,6 @@ namespace POStock.Controllers
             return View(kategoriList);
         }
 
-        //[HttpGet]
-        //public ActionResult KategoriOlustur()
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public ActionResult KategoriOlustur(KATEGORI kat)
         {
@@ -31,12 +25,6 @@ namespace POStock.Controllers
             db.KATEGORI.Add(kat);
             db.SaveChanges();
             return RedirectToAction("KategoriIndex");
-        }
-
-        [HttpGet]
-        public ActionResult KategoriOlustur2()
-        {
-            return View();
         }
 
         [HttpPost]

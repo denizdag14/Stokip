@@ -243,12 +243,8 @@
     <Content Include="Views\Musteri\MusteriIndex.cshtml" />
     <Content Include="Views\Satis\SatisIndex.cshtml" />
     <Content Include="Views\Alis\AlisIndex.cshtml" />
-    <Content Include="Views\Kategori\KategoriOlustur.cshtml" />
     <Content Include="Views\Urun\UrunOlustur.cshtml" />
-    <Content Include="Views\Kategori\KategoriOlustur2.cshtml" />
     <Content Include="Views\Musteri\MusteriOlustur.cshtml" />
-    <Content Include="Views\Satis\SatisOlustur.cshtml" />
-    <Content Include="Views\Alis\AlisOlustur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\Stokip\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|C:\\Users\\USER\\source\\repos\\Stokip\\controllers\\satiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:controllers\\satiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\satis\\satisindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\satis\\satisindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\satis\\satisolustur.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\satis\\satisolustur.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\alis\\alisindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\alis\\alisindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\urun\\urunindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -23,12 +19,8 @@
       "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\kategori\\kategoriindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\controllers\\kategoricontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:controllers\\kategoricontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|C:\\Users\\USER\\source\\repos\\Stokip\\controllers\\uruncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:controllers\\uruncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\musteri\\musteriindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\musteri\\musteriindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|C:\\Users\\USER\\source\\repos\\Stokip\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -46,7 +38,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -60,97 +52,75 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SatisIndex.cshtml",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Satis\\SatisIndex.cshtml",
-              "RelativeDocumentMoniker": "Views\\Satis\\SatisIndex.cshtml",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Satis\\SatisIndex.cshtml",
-              "RelativeToolTip": "Views\\Satis\\SatisIndex.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABwAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-26T20:11:20.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "KategoriIndex.cshtml",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Kategori\\KategoriIndex.cshtml",
-              "RelativeDocumentMoniker": "Views\\Kategori\\KategoriIndex.cshtml",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Kategori\\KategoriIndex.cshtml",
-              "RelativeToolTip": "Views\\Kategori\\KategoriIndex.cshtml",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAAFkAAAAUAAAA",
+              "Title": "MusteriIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Musteri\\MusteriIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Musteri\\MusteriIndex.cshtml",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Musteri\\MusteriIndex.cshtml",
+              "RelativeToolTip": "Views\\Musteri\\MusteriIndex.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-26T19:16:22.744Z",
+              "WhenOpened": "2024-03-27T08:03:41.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UrunIndex.cshtml",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Urun\\UrunIndex.cshtml",
-              "RelativeDocumentMoniker": "Views\\Urun\\UrunIndex.cshtml",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Urun\\UrunIndex.cshtml",
-              "RelativeToolTip": "Views\\Urun\\UrunIndex.cshtml",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAAJYAAAAjAAAA",
+              "Title": "KategoriIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Kategori\\KategoriIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Kategori\\KategoriIndex.cshtml",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Kategori\\KategoriIndex.cshtml",
+              "RelativeToolTip": "Views\\Kategori\\KategoriIndex.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABwAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-26T19:07:50.723Z",
+              "WhenOpened": "2024-03-27T08:03:11.347Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SatisOlustur.cshtml",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Satis\\SatisOlustur.cshtml",
-              "RelativeDocumentMoniker": "Views\\Satis\\SatisOlustur.cshtml",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Satis\\SatisOlustur.cshtml",
-              "RelativeToolTip": "Views\\Satis\\SatisOlustur.cshtml",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAC0AAAAvAAAA",
+              "DocumentIndex": 1,
+              "Title": "AlisIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Alis\\AlisIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Alis\\AlisIndex.cshtml",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Alis\\AlisIndex.cshtml",
+              "RelativeToolTip": "Views\\Alis\\AlisIndex.cshtml",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAAAKIAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-26T11:31:54.61Z",
+              "WhenOpened": "2024-03-27T07:03:58.797Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SatisController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\SatisController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SatisController.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\SatisController.cs",
-              "RelativeToolTip": "Controllers\\SatisController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwCgAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T11:31:57.747Z",
+              "Title": "SatisIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Satis\\SatisIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Satis\\SatisIndex.cshtml",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Satis\\SatisIndex.cshtml",
+              "RelativeToolTip": "Views\\Satis\\SatisIndex.cshtml",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAowKIAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-27T07:02:21.98Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "KategoriController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\KategoriController.cs",
-              "RelativeDocumentMoniker": "Controllers\\KategoriController.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\KategoriController.cs",
-              "RelativeToolTip": "Controllers\\KategoriController.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAkwEsAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T19:02:00.995Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UrunController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\UrunController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UrunController.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\UrunController.cs",
-              "RelativeToolTip": "Controllers\\UrunController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T11:59:18.684Z",
+              "DocumentIndex": 2,
+              "Title": "UrunIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Urun\\UrunIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Urun\\UrunIndex.cshtml",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Urun\\UrunIndex.cshtml",
+              "RelativeToolTip": "Views\\Urun\\UrunIndex.cshtml",
+              "ViewState": "AQIAAHwAAAAAAAAAAAAAAJsAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-27T08:04:00.92Z",
               "EditorCaption": ""
             }
           ]
@@ -170,6 +140,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
             }
           ]
         }

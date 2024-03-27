@@ -13,22 +13,32 @@ namespace POStock.Controllers
         public ActionResult AlisIndex()
         {
             var alisList = db.ALIS.ToList();
+            var urunList = db.URUN.ToList();
+            ViewBag.urunList = urunList;
             return View(alisList);
         }
 
-        [HttpGet]
-        public ActionResult AlisOlustur()
-        {
-            var urunList = db.URUN.ToList();
-            return View(urunList);
-        }
-
         [HttpPost]
-        public ActionResult AlisOlustur(ALIS alis)
+        public ActionResult AlisOlustur(short Urun, int Adet, string ToplamFiyat)
         {
+            ALIS alis = new ALIS();
+            alis.Adet = Adet;
+            alis.ToplamFiyat = Convert.ToDecimal(ToplamFiyat.Replace(",", "_").Replace(".", ",").Replace("_", "."));
+            alis.URUN = db.URUN.Find(Urun);
             alis.BirimFiyat = alis.ToplamFiyat / alis.Adet;
             alis.IsActive = true;
             db.ALIS.Add(alis);
+            alis.URUN.Stok = (short?)(alis.URUN.Stok + (short)alis.Adet);
+            db.SaveChanges();
+            return Json(new { success = true, message = "Alış başarıyla oluşturuldu" });
+        }
+
+        public ActionResult AlisSil(int id)
+        {
+            ALIS alis = db.ALIS.Find(id);
+            if(alis.Adet >= alis.URUN.Stok) alis.URUN.Stok = 0;
+            else alis.URUN.Stok -= (short)alis.Adet;
+            db.ALIS.Remove(alis);
             db.SaveChanges();
             return RedirectToAction("AlisIndex");
         }

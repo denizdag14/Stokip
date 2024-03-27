@@ -12,18 +12,12 @@ namespace POStock.Controllers
         DbStockEntities db = new DbStockEntities();
         public ActionResult SatisIndex()
         {
-            var satisList = db.SATIS.ToList();
-            ViewBag.satisList = satisList;
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult SatisOlustur()
-        {
             var urunList = db.URUN.ToList();
             var musteriList = db.MUSTERI.ToList();
             ViewBag.urunList = urunList;
             ViewBag.musteriList = musteriList;
+            var satisList = db.SATIS.ToList();
+            ViewBag.satisList = satisList;
             return View();
         }
 
@@ -31,7 +25,7 @@ namespace POStock.Controllers
         public ActionResult SatisOlustur(short Urun, short Musteri, int Adet, string ToplamFiyat)
         {
             SATIS satis = new SATIS();
-            satis.ToplamFiyat = Convert.ToDecimal(ToplamFiyat);
+            satis.ToplamFiyat = Convert.ToDecimal(ToplamFiyat.Replace(",", "_").Replace(".", ",").Replace("_", "."));
             satis.Musteri = Musteri;
             satis.Urun = Urun;
             satis.MUSTERI = db.MUSTERI.Find(Musteri);
@@ -44,15 +38,18 @@ namespace POStock.Controllers
                 return Json(new { success = false, message = "Üzgünüz, bu ürünün stokları tükenmiş durumda ya da stok sayısı yetersiz.\nStok: " + satis.URUN.Stok.ToString() });
             }
             db.SATIS.Add(satis);
-            satis.URUN.Stok--;
+            satis.URUN.Stok = (short?)(satis.URUN.Stok - (short)satis.Adet);
             db.SaveChanges();
             return Json(new { success = true, message = "Satış başarıyla oluşturuldu"});
+        }
 
-            //satis.BirimFiyat = satis.ToplamFiyat / satis.Adet;
-            //satis.SatisID = 5;
-            //db.SATIS.Add(satis);
-            //db.SaveChanges();
-            //return RedirectToAction("SatisIndex");
+        public ActionResult SatisSil(int id)
+        {
+            SATIS satis = db.SATIS.Find(id);
+            satis.URUN.Stok += (short)satis.Adet;
+            db.SATIS.Remove(satis);
+            db.SaveChanges();
+            return RedirectToAction("SatisIndex");
         }
     }
 }

@@ -22,11 +22,10 @@
         <tbody class="table table-group-divider">
 
             @{
-                // Aktif ürünler için ayrı bir sayacı takip et
                 int aktifSayac = 1;
             }
 
-            @for (int i = 0; i < Model.Count; i++)
+            @for (int i = Model.Count - 1; i >= 0; i--)
             {
                 if (Model[i].IsActive == true)
                 {
@@ -95,9 +94,8 @@
         $('.btn-guncelle').click(function () {
             var musteriId = $(this).data('id');
 
-            // Ajax isteği yaparak ürün bilgilerini al
             $.ajax({
-                url: '/Musteri/MusteriBilgisiniGetir', // Sunucuda bu adrese sahip bir metot olmalı
+                url: '/Musteri/MusteriBilgisiniGetir',
                 type: 'GET',
                 data: { id: musteriId },
                 success: function (data) {
@@ -113,19 +111,16 @@
             });
         });
 
-        // Kaydet butonuna tıklanınca
         $('#btnSave').click(function () {
             var formData = new FormData($('#musteriGuncelleForm')[0]);
 
-            // Ajax isteği yaparak form verilerini sunucuya gönder
             $.ajax({
-                url: '/Musteri/MusteriGuncelle', // Sunucuda bu adrese sahip bir metot olmalı
+                url: '/Musteri/MusteriGuncelle',
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function () {
-                    // Başarılı ise modalı kapat ve sayfayı yenile
                     $('#musteriGuncelle').modal('hide');
                     location.reload();
                 },

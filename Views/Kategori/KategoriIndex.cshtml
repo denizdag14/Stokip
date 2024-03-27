@@ -22,11 +22,10 @@
         <tbody class="table table-group-divider">
 
             @{
-                // Aktif ürünler için ayrı bir sayacı takip et
                 int aktifSayac = 1;
             }
 
-            @for (int i = 0; i < Model.Count; i++)
+            @for (int i = Model.Count - 1; i >= 0; i--)
             {
                 if (Model[i].IsActive == true)
                 {
@@ -42,7 +41,6 @@
         </tbody>
 
     </table>
-    @*<a class="btn btn-success" href="@Url.Action("KategoriOlustur", "Kategori")">Yeni Kategori</a>*@
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#katEkle">Yeni Kategori</button>
 
 </div>
@@ -122,9 +120,8 @@
         $('.btn-guncelle').click(function () {
             var katId = $(this).data('id');
 
-            // Ajax isteği yaparak ürün bilgilerini al
             $.ajax({
-                url: '/Kategori/KategoriBilgisiniGetir', // Sunucuda bu adrese sahip bir metot olmalı
+                url: '/Kategori/KategoriBilgisiniGetir',
                 type: 'GET',
                 data: { id: katId },
                 success: function (data) {
@@ -139,19 +136,16 @@
             });
         });
 
-        // Kaydet butonuna tıklanınca
         $('#btnSave').click(function () {
             var formData = new FormData($('#katGuncelleForm')[0]);
 
-            // Ajax isteği yaparak form verilerini sunucuya gönder
             $.ajax({
-                url: '/Kategori/KategoriGuncelle', // Sunucuda bu adrese sahip bir metot olmalı
+                url: '/Kategori/KategoriGuncelle',
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function () {
-                    // Başarılı ise modalı kapat ve sayfayı yenile
                     $('#katGuncelle').modal('hide');
                     location.reload();
                 },
