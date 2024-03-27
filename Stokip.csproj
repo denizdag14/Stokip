@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlisController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\SatisController.cs" />
     <Compile Include="Controllers\UrunController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
@@ -245,6 +246,7 @@
     <Content Include="Views\Alis\AlisIndex.cshtml" />
     <Content Include="Views\Urun\UrunOlustur.cshtml" />
     <Content Include="Views\Musteri\MusteriOlustur.cshtml" />
+    <Content Include="Views\Main\MainIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

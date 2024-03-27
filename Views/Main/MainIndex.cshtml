@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "MainIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="salesPieChart" style="width: 500px; height: 300px;"></div>
+<div id="purchasesPieChart" style="width: 500px; height: 300px;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawCharts);
+
+    function drawCharts() {
+        // Satış verilerini çek
+        $.ajax({
+            url: '/Main/GetSalesData',
+            type: 'GET',
+            dataType: 'json',
+            success: function (salesData) {
+                drawSalesChart(salesData);
+            },
+            error: function (error) {
+                console.error('Satış verileri alınamadı:', error);
+            }
+        });
+
+        // Alış verilerini çek
+        $.ajax({
+            url: '/Main/GetPurchasesData',
+            type: 'GET',
+            dataType: 'json',
+            success: function (purchasesData) {
+                drawPurchasesChart(purchasesData);
+            },
+            error: function (error) {
+                console.error('Alış verileri alınamadı:', error);
+            }
+        });
+    }
+
+    function drawSalesChart(data) {
+        var salesChartData = [['Ürün', 'Satış Miktarı']];
+        data.forEach(function (item) {
+            salesChartData.push([item.ProductName.toString(), item.TotalQuantity]);
+        });
+
+        var salesChartDataTable = google.visualization.arrayToDataTable(salesChartData);
+
+        var salesChartOptions = {
+            title: 'Ürün Satış Miktarları'
+        };
+
+        var salesChart = new google.visualization.PieChart(document.getElementById('salesPieChart'));
+        salesChart.draw(salesChartDataTable, salesChartOptions);
+    }
+
+    function drawPurchasesChart(data) {
+        var purchasesChartData = [['Ürün', 'Alış Miktarı']];
+        data.forEach(function (item) {
+            purchasesChartData.push([item.ProductName.toString(), item.TotalQuantity]);
+        });
+
+        var purchasesChartDataTable = google.visualization.arrayToDataTable(purchasesChartData);
+
+        var purchasesChartOptions = {
+            title: 'Ürün Alış Miktarları'
+        };
+
+        var purchasesChart = new google.visualization.PieChart(document.getElementById('purchasesPieChart'));
+        purchasesChart.draw(purchasesChartDataTable, purchasesChartOptions);
+    }
+</script>
