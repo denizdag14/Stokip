@@ -1,0 +1,41 @@
+﻿.pagination > li.active > a, .pagination > li.active > span {
+    color: gold !important;
+    background-color: indigo !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: indigo !important;
+    border-color: gold !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: goldenrod !important;
+}
+
+.btn-success {
+    background-color: indigo !important;
+    border-color: gold !important;
+    color: gold !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: midnightblue !important;
+}
+
+.btn-outline-danger {
+    border-color: midnightblue !important;
+}
+
+h3 {
+    color: goldenrod;
+    text-align: center;
+}
+
+.custom-alert {
+    background-color: indigo;
+    color: gold;
+}
+
+.nav-link.active i {
+    color: indigo !important; 
+}

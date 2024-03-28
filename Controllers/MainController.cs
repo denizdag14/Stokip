@@ -27,7 +27,7 @@ namespace POStock.Controllers
         public JsonResult GetSalesData()
         {
             var salesData = db.SATIS
-                .Where(s => s.URUN.IsActive == true)
+                //.Where(s => s.URUN.IsActive == true)
                 .GroupBy(a => new { a.Urun, a.URUN.UrunAd })
                 .Select(g => new { ProductName = g.Key.UrunAd, TotalQuantity = g.Sum(a => a.Adet) })
                 .ToList();
@@ -38,7 +38,7 @@ namespace POStock.Controllers
         public JsonResult GetPurchasesData()
         {
             var purchasesData = db.ALIS
-                .Where(a => a.URUN.IsActive == true)
+                //.Where(a => a.URUN.IsActive == true)
                 .GroupBy(a => new { a.Urun, a.URUN.UrunAd })
                 .Select(g => new { ProductName = g.Key.UrunAd, TotalQuantity = g.Sum(a => a.Adet) })
                 .ToList();

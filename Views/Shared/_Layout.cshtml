@@ -11,33 +11,21 @@
     <title>View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
     <script src="https://cdn.datatables.net/colreorder/2.0.0/js/dataTables.colReorder.js"></script>
     <script src="https://cdn.datatables.net/colreorder/2.0.0/js/colReorder.bootstrap5.js"></script>
-    <style>
-
-        .pagination > li.active > a, .pagination > li.active > span {
-            color:gold !important;
-            background-color: indigo !important;
-        }
-        .pagination > li > a, .pagination > li > span{
-            color:indigo !important;
-            border-color:gold !important;
-        }
-
-
-
-    </style>
 
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-light" style="margin-bottom:30px">
+    <nav class="navbar navbar-expand-lg bg-light nav-tabs" style="margin-bottom:30px">
         <div class="container-fluid">
             <a class="navbar-brand" style="color:gold" href="@Url.Action("MainIndex", "Main")">
                 <img src="@Url.Content("~/stokip-high-resolution-logo-transparent.png")" alt="" width="100" height="24">
@@ -47,12 +35,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="@Url.Action("MainIndex", "Main")"><b>Ana Sayfa</b></a>
-                    <a class="nav-link" href="@Url.Action("UrunIndex", "Urun")"><b>Ürünler</b></a>
-                    <a class="nav-link" href="@Url.Action("KategoriIndex", "Kategori")"><b>Kategoriler</b></a>
-                    <a class="nav-link" href="@Url.Action("MusteriIndex", "Musteri")"><b>Müşteriler</b></a>
-                    <a class="nav-link" href="@Url.Action("SatisIndex", "Satis")"><b>Satışlar</b></a>
-                    <a class="nav-link" href="@Url.Action("AlisIndex", "Alis")"><b>Alışlar</b></a>
+                    <a class="nav-link @(activeClass("Main"))" href="@Url.Action("MainIndex", "Main")"><i class="fas fa-home"></i> <b>Ana Sayfa</b></a>
+                    <a class="nav-link @(activeClass("Urun"))" href="@Url.Action("UrunIndex", "Urun")"><i class="fas fa-box"></i> <b>Ürünler</b></a>
+                    <a class="nav-link @(activeClass("Kategori"))" href="@Url.Action("KategoriIndex", "Kategori")"><i class="fas fa-tags"></i> <b>Kategoriler</b></a>
+                    <a class="nav-link @(activeClass("Musteri"))" href="@Url.Action("MusteriIndex", "Musteri")"><i class="fas fa-users"></i> <b>Müşteriler</b></a>
+                    <a class="nav-link @(activeClass("Satis"))" href="@Url.Action("SatisIndex", "Satis")"><i class="fas fa-money-bill-alt"></i> <b>Satışlar</b></a>
+                    <a class="nav-link @(activeClass("Alis"))" href="@Url.Action("AlisIndex", "Alis")"><i class="fas fa-shopping-cart"></i> <b>Alışlar</b></a>
                 </div>
             </div>
         </div>
@@ -61,3 +49,11 @@
     @RenderBody()
 </body>
 </html>
+
+@{
+    string activeClass(string controller)
+    {
+        var active = string.Equals(ViewContext.RouteData.Values["Controller"].ToString(), controller, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+        return active;
+    }
+}

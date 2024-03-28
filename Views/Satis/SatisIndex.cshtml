@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="text-align:center"><h3><b>SATIŞLAR</b></h3></div>
+<div class="container shadow-lg p-3 mb-5 bg-body rounded">
 
-<div class="container">
+    <div><h3><b>SATIŞLAR</b></h3></div>
 
     <table class="table table-hover" style="width:100%;" id="myTable">
 
@@ -24,13 +24,13 @@
         </thead>
         <tbody class="table table-group-divider">
 
-            @{ 
+            @{
                 int sayac = 1;
             }
 
             @for (int i = ViewBag.satisList.Count - 1; i >= 0; i--)
             {
-                
+
                 <tr style="text-align:center">
                     <td><b>@sayac</b></td>
                     <td style="text-align:left;">@ViewBag.satisList[i].URUN.UrunAd</td>
@@ -45,9 +45,9 @@
                     }
                     else
                     {
-                    <td>
-                        <a class="btn btn-outline-danger disabled">Sil</a>
-                    </td>
+                        <td>
+                            <a class="btn btn-outline-danger disabled">Sil</a>
+                        </td>
                     }
 
                 </tr>
