@@ -45,16 +45,6 @@
           <Property Name="ToplamFiyat" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="URUN">
           <Key>
             <PropertyRef Name="UrunID" />
@@ -64,6 +54,15 @@
           <Property Name="UrunKategori" Type="smallint" />
           <Property Name="Stok" Type="smallint" />
           <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_ALIS_URUN">
           <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
@@ -118,8 +117,8 @@
           <EntitySet Name="KATEGORI" EntityType="Self.KATEGORI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MUSTERI" EntityType="Self.MUSTERI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SATIS" EntityType="Self.SATIS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URUN" EntityType="Self.URUN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ALIS_URUN" Association="Self.FK_ALIS_URUN">
             <End Role="URUN" EntitySet="URUN" />
             <End Role="ALIS" EntitySet="ALIS" />
@@ -185,16 +184,6 @@
           <NavigationProperty Name="MUSTERI" Relationship="DbStockModel.FK_SATIS_MUSTERI1" FromRole="SATIS" ToRole="MUSTERI" />
           <NavigationProperty Name="URUN" Relationship="DbStockModel.FK_SATIS_URUN1" FromRole="SATIS" ToRole="URUN" />
           <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="URUN">
           <Key>
@@ -262,7 +251,6 @@
           <EntitySet Name="KATEGORI" EntityType="Self.KATEGORI" />
           <EntitySet Name="MUSTERI" EntityType="Self.MUSTERI" />
           <EntitySet Name="SATIS" EntityType="Self.SATIS" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="URUN" EntityType="Self.URUN" />
           <AssociationSet Name="FK_ALIS_URUN" Association="DbStockModel.FK_ALIS_URUN1">
             <End Role="URUN" EntitySet="URUN" />
@@ -280,7 +268,17 @@
             <End Role="URUN" EntitySet="URUN" />
             <End Role="SATIS" EntitySet="SATIS" />
           </AssociationSet>
+          <EntitySet Name="USERS" EntityType="DbStockModel.USERS" />
         </EntityContainer>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -331,17 +329,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DbStockModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="URUN">
             <EntityTypeMapping TypeName="DbStockModel.URUN">
               <MappingFragment StoreEntitySet="URUN">
@@ -350,6 +337,16 @@
                 <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
                 <ScalarProperty Name="UrunKategori" ColumnName="UrunKategori" />
                 <ScalarProperty Name="Stok" ColumnName="Stok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="DbStockModel.USERS">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

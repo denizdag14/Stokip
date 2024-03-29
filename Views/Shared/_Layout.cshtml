@@ -34,7 +34,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
+                <div id="navbar" class="navbar-nav">
                     <a class="nav-link @(activeClass("Main"))" href="@Url.Action("MainIndex", "Main")"><i class="fas fa-home"></i> <b>Ana Sayfa</b></a>
                     <a class="nav-link @(activeClass("Urun"))" href="@Url.Action("UrunIndex", "Urun")"><i class="fas fa-box"></i> <b>Ürünler</b></a>
                     <a class="nav-link @(activeClass("Kategori"))" href="@Url.Action("KategoriIndex", "Kategori")"><i class="fas fa-tags"></i> <b>Kategoriler</b></a>
@@ -43,8 +43,19 @@
                     <a class="nav-link @(activeClass("Alis"))" href="@Url.Action("AlisIndex", "Alis")"><i class="fas fa-shopping-cart"></i> <b>Alışlar</b></a>
                 </div>
             </div>
+            <div class="dropdown justify-content-end userPanel">
+                <button style="border-color:indigo !important;" class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-edit"></i>
+                </button>
+                <ul style="right:0;" class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton1">
+                    <li><a style="text-decoration: none;" id="username" class="dropdown-item-text"></a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
+
 
     @RenderBody()
 </body>
@@ -57,3 +68,35 @@
         return active;
     }
 }
+
+<script>
+
+    $(document).ready(function() {
+        // Dropdown menüsüne tıklandığında açılmasını sağlar
+        $('.dropdown-toggle').click(function() {
+            var dropdownMenu = $(this).next('.dropdown-menu');
+            dropdownMenu.toggleClass('show');
+            dropdownMenu.parent().toggleClass('show');
+        });
+
+        // Dropdown menüsünün dışında bir yere tıklandığında kapatılmasını sağlar
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.dropdown-toggle').length) {
+                $('.dropdown-menu').removeClass('show');
+                $('.dropdown-toggle').parent().removeClass('show');
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("GetActiveUser", "User")',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                var activeUser = response.username;
+                $("#username").html(activeUser);
+            }
+        });
+
+    });
+
+</script>

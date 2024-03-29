@@ -40,9 +40,9 @@ public partial class DbStockEntities : DbContext
 
     public virtual DbSet<SATIS> SATIS { get; set; }
 
-    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-
     public virtual DbSet<URUN> URUN { get; set; }
+
+    public virtual DbSet<USERS> USERS { get; set; }
 
 }
 

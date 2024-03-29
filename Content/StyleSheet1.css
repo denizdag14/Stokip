@@ -39,3 +39,13 @@ h3 {
 .nav-link.active i {
     color: indigo !important; 
 }
+
+.input-group-text {
+    background-color: gold !important;
+    color: indigo !important;
+}
+
+.custom-price {
+    background-color: white !important;
+    color: black !important;
+}

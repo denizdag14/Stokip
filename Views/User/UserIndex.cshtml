@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "UserIndex";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container custom-center">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Giriş Yap</h5>
+                    <form>
+                        <div class="input-group mb-3">
+
+                            <span class="input-group-text">Kullanıcı Adı: </span>
+                            <input type="text" id="loginUsername" class="form-control" name="username" />
+
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <span class="input-group-text">Şifre: </span>
+                            <input type="password" id="loginPassword" class="form-control" name="password" />
+
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-success float-start btn-kayitOl" data-bs-toggle="modal" data-bs-target="#kayitOl">Kayıt Ol</button>
+                            <button type="button" class="btn btn-success float-end btn-girisYap">Giriş Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="kayitOl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Kayıt Ol</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="kayitOlForm">
+
+                    <div class="input-group mb-3">
+
+                        <span class="input-group-text">Kullanıcı Adı: </span>
+                        <input type="text" id="registerUsername" class="form-control" name="username" />
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <span class="input-group-text">Şifre: </span>
+                        <input type="password" id="registerPassword" class="form-control" name="password" />
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <span class="input-group-text">Şifre Tekrarı: </span>
+                        <input type="password" id="registerPasswordControl" class="form-control"/>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" id="btnKayit" class="btn btn-success">Kayıt Ol</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('#btnKayit').click(function () {
+            var username = $('#registerUsername').val();
+            var password = $('#registerPassword').val();
+            var confirmPassword = $('#registerPasswordControl').val();
+
+            if (password !== confirmPassword) {
+                alert("Şifreler eşleşmiyor!");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("Register", "User")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert("Kayıt başarılı!");
+                        window.location.href = '@Url.Action("UserIndex", "User")';
+                    } else {
+                        alert("Kayıt başarısız!");
+                    }
+                },
+                error: function () {
+                    alert("Bir hata oluştu!");
+                }
+            });
+        });
+
+        $('.btn-girisYap').click(function () {
+            var username = $('#loginUsername').val();
+            var password = $('#loginPassword').val();
+
+            $.ajax({
+                url: '@Url.Action("Login", "User")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = '@Url.Action("MainIndex", "Main")';
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Sunucu hatası! Giriş yapılamadı.");
+                }
+            });
+        });
+    });
+</script>
