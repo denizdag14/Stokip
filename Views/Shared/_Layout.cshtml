@@ -48,13 +48,54 @@
                     <i class="fas fa-user-edit"></i>
                 </button>
                 <ul style="right:0;" class="dropdown-menu rounded" aria-labelledby="dropdownMenuButton1">
-                    <li><a style="text-decoration: none;" id="username" class="dropdown-item-text"></a></li>
+                    <li><a style="text-decoration: none;" id="username" class="dropdown-item-text"></a></li> 
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
+                    <li><button class="dropdown-item btn btn-UpdateCredentials" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Hesap Bilgileri</button></li>
+                    <li><a class="dropdown-item btn">Çıkış Yap</a></li>
+
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Bilgilerimi Değiştir</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="input-group mb-3 form-group">
+                            <span class="input-group-text"><label for="changePasswordUsername" class="form-label">Kullanıcı Adı:</label></span>
+                            <input type="text" class="form-control" id="changePasswordUsername" name="username" readonly>
+                        </div>
+                        <div class="input-group mb-3 form-group">
+                            <span class="input-group-text"><label for="changePasswordUsername" class="form-label">Yeni Kullanıcı Adı:</label></span>
+                            <input placeholder="Değiştirmek istemiyorsanız boş bırakın." type="text" class="form-control" id="changePasswordNewUsername" name="username">
+                        </div>
+                        <div class="input-group mb-3 form-group">
+                            <span class="input-group-text"><label for="changePasswordOld" class="form-label">Mevcut Şifre:</label></span>
+                            <input type="password" class="form-control" id="changePasswordOld" name="oldPassword">
+                        </div>
+                        <div class="input-group mb-3 form-group">
+                            <span class="input-group-text"><label for="changePasswordNew" class="form-label">Yeni Şifre:</label></span>
+                            <input type="password" class="form-control" id="changePasswordNew" name="newPassword">
+                        </div>
+                        <div class="input-group mb-3 form-group">
+                            <span class="input-group-text"><label for="changePasswordConfirm" class="form-label">Yeni Şifre Tekrar:</label></span>
+                            <input type="password" class="form-control" id="changePasswordConfirm" name="confirmPassword">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" id="changePasswordBtn" class="btn btn-success">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @RenderBody()
@@ -72,14 +113,12 @@
 <script>
 
     $(document).ready(function() {
-        // Dropdown menüsüne tıklandığında açılmasını sağlar
         $('.dropdown-toggle').click(function() {
             var dropdownMenu = $(this).next('.dropdown-menu');
             dropdownMenu.toggleClass('show');
             dropdownMenu.parent().toggleClass('show');
         });
 
-        // Dropdown menüsünün dışında bir yere tıklandığında kapatılmasını sağlar
         $(document).on('click', function(e) {
             if (!$(e.target).closest('.dropdown-toggle').length) {
                 $('.dropdown-menu').removeClass('show');
@@ -94,8 +133,56 @@
             success: function (response) {
                 var activeUser = response.username;
                 $("#username").html(activeUser);
+                $("#changePasswordUsername").val(activeUser);
             }
         });
+
+        $(".btn-UpdateCredentials").click(function () {
+            $('#changePasswordModal').modal('show');
+        })
+
+        $('#changePasswordBtn').click(function () {
+            var username = $('#changePasswordUsername').val();
+            var newUsername = $('#changePasswordNewUsername').val();
+            var oldPassword = $('#changePasswordOld').val();
+            var newPassword = $('#changePasswordNew').val();
+            var confirmPassword = $('#changePasswordConfirm').val();
+
+            if (newPassword !== confirmPassword) {
+                alert("Yeni şifreler eşleşmiyor!");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("UpdateCredentials", "User")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    username: username,
+                    newUsername: newUsername,
+                    oldPassword: oldPassword,
+                    newPassword: newPassword
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert("Bilgileriniz başarıyla değiştirildi!");
+                        window.location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Sunucu hatası! Bilgileriniz değiştirilemedi.");
+                }
+            });
+        });
+
+        $('#changePasswordModal').keypress(function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                $("#changePasswordBtn").click();
+            }
+        })
 
     });
 

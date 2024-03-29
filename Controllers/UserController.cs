@@ -14,8 +14,9 @@ using System.Threading.Tasks;
 namespace POStock.Controllers
 {
     public class UserController : Controller
-    {   
+    {
 
+        HttpCookie userNameCookie = new HttpCookie("UserCookie");
         DbStockEntities db = new DbStockEntities();
 
         public ActionResult UserIndex()
@@ -75,7 +76,6 @@ namespace POStock.Controllers
 
                     if (user.PasswordHash == hashedPassword)
                     {
-                        HttpCookie userNameCookie = new HttpCookie("UserCookie");
                         userNameCookie.Value = user.Username;
                         Response.Cookies.Add(userNameCookie);
                         return Json(new { success = true });
@@ -95,6 +95,52 @@ namespace POStock.Controllers
                 return Json(new { success = false, message = "Giriş sırasında bir hata oluştu: " + ex.Message });
             }
 
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCredentials(string username, string newUsername, string oldPassword, string newPassword)
+        {
+            try
+            {
+                var user = db.USERS.FirstOrDefault(u => u.Username == username);
+
+                if (user != null)
+                {
+                    string hashedOldPassword = PasswordHasher.HashPassword(oldPassword, user.Salt);
+
+                    if (user.PasswordHash == hashedOldPassword)
+                    {
+                        // Yeni şifreyi hash'le ve veritabanında güncelle
+                        string newSalt = PasswordHasher.GenerateSalt(16);
+                        string newHashedPassword = PasswordHasher.HashPassword(newPassword, newSalt);
+                        if (newUsername != "")
+                        {
+                            user.Username = newUsername;
+                            userNameCookie.Value = user.Username;
+                            Response.Cookies.Add(userNameCookie);
+                        }
+
+                        user.PasswordHash = newHashedPassword;
+                        user.Salt = newSalt;
+
+                        db.SaveChanges();
+
+                        return Json(new { success = true, message = "Şifre başarıyla güncellendi." });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = "Mevcut şifreniz hatalı." });
+                    }
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Kullanıcı bulunamadı." });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Şifre değiştirme sırasında bir hata oluştu: " + ex.Message });
+            }
         }
 
     }
