@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\Stokip\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\kategori\\kategoriindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:views\\kategori\\kategoriindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{82CCAE72-0D70-4DDC-95AC-4E53FC6F51DA}|Stokip.csproj|c:\\users\\user\\source\\repos\\stokip\\views\\main\\mainindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -30,17 +30,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 304,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAJAAAAAAAAAAAAAowKkAAABGAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACYAAABtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-02-20T18:01:30.617Z",
               "IsPinned": true,
@@ -56,13 +56,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "KategoriIndex.cshtml",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Kategori\\KategoriIndex.cshtml",
               "RelativeDocumentMoniker": "Views\\Kategori\\KategoriIndex.cshtml",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Views\\Kategori\\KategoriIndex.cshtml",
               "RelativeToolTip": "Views\\Kategori\\KategoriIndex.cshtml",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAFgAAAAxAAAA",
+              "ViewState": "AQIAAIcAAAAAAAAAAAAAAJ0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-03-29T19:03:32.844Z",
               "EditorCaption": ""
@@ -82,13 +82,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Stokip\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAMwBwAAAAIAAAA",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAewG8AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-29T18:52:19.29Z",
               "EditorCaption": ""
