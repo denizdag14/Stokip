@@ -1,1 +1,30 @@
+# Visual Studio geçici dosyalarý
 .vs/
+*.user
+*.suo
+
+# Derleme çýktýlarý
+bin/
+obj/
+
+# NuGet paketleri
+*.nupkg
+packages/
+
+# Visual Studio Code geçici dosyalarý
+.vscode/
+
+# Yerel ayar dosyalarý
+appsettings.json
+appsettings.Development.json
+
+# Debug sembol dosyalarý
+*.pdb
+
+# Log dosyalarý
+*.log
+logs/
+
+# Windows Gezgini geçici dosyalarý
+Thumbs.db
+desktop.ini
