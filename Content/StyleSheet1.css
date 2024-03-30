@@ -19,11 +19,11 @@
 }
 
 .btn-outline-danger:hover {
-    background-color: midnightblue !important;
+    background-color: gold !important;
 }
 
 .btn-outline-danger {
-    border-color: midnightblue !important;
+    border-color: gold !important;
 }
 
 h3 {
@@ -48,4 +48,20 @@ h3 {
 .custom-price {
     background-color: white !important;
     color: black !important;
+}
+
+.fa-dolly {
+    color:indigo !important;
+}
+
+.fa-logoname {
+    color:gold !important;
+}
+
+div {
+    font-family: 'Open Sans', sans-serif;
+}
+
+::placeholder {
+    font-size: 12px;
 }

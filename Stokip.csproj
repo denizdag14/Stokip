@@ -399,8 +399,6 @@
     <Content Include="Views\Musteri\MusteriIndex.cshtml" />
     <Content Include="Views\Satis\SatisIndex.cshtml" />
     <Content Include="Views\Alis\AlisIndex.cshtml" />
-    <Content Include="Views\Urun\UrunOlustur.cshtml" />
-    <Content Include="Views\Musteri\MusteriOlustur.cshtml" />
     <Content Include="Views\Main\MainIndex.cshtml" />
     <Content Include="Views\User\UserIndex.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />

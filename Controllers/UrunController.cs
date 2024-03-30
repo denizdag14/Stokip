@@ -19,16 +19,12 @@ namespace POStock.Controllers
             return View(urunList);
         }
 
-        [HttpGet]
-        public ActionResult UrunOlustur()
-        {
-            var katList = db.KATEGORI.ToList();
-            return View(katList);
-        }
-
         [HttpPost]
-        public ActionResult UrunOlustur(URUN urun)
+        public ActionResult UrunOlustur(string UrunAd, short Kategori)
         {
+            URUN urun = new URUN();
+            urun.UrunAd = UrunAd;
+            urun.UrunKategori = Kategori;
             urun.Stok = 0;
             urun.IsActive = true;
             db.URUN.Add(urun);

@@ -97,6 +97,16 @@ namespace POStock.Controllers
 
         }
 
+        public ActionResult Logout()
+        {
+            if (Request.Cookies["UserCookie"] != null)
+            {
+                userNameCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(userNameCookie);
+            }
+            return RedirectToAction("UserIndex", "User");
+        }
+
         [HttpPost]
         public ActionResult UpdateCredentials(string username, string newUsername, string oldPassword, string newPassword)
         {
@@ -106,31 +116,46 @@ namespace POStock.Controllers
 
                 if (user != null)
                 {
-                    string hashedOldPassword = PasswordHasher.HashPassword(oldPassword, user.Salt);
-
-                    if (user.PasswordHash == hashedOldPassword)
+                    if (newUsername != "")
                     {
-                        // Yeni şifreyi hash'le ve veritabanında güncelle
-                        string newSalt = PasswordHasher.GenerateSalt(16);
-                        string newHashedPassword = PasswordHasher.HashPassword(newPassword, newSalt);
-                        if (newUsername != "")
+                        user.Username = newUsername;
+                        userNameCookie.Value = user.Username;
+                        Response.Cookies.Add(userNameCookie);
+                    }
+                    if (newPassword != "")
+                    {
+                        string hashedOldPassword = PasswordHasher.HashPassword(oldPassword, user.Salt);
+                        if (user.PasswordHash == hashedOldPassword)
                         {
-                            user.Username = newUsername;
-                            userNameCookie.Value = user.Username;
-                            Response.Cookies.Add(userNameCookie);
+                            
+                            string newSalt = PasswordHasher.GenerateSalt(16);
+                            string newHashedPassword = PasswordHasher.HashPassword(newPassword, newSalt);
+
+
+                            user.PasswordHash = newHashedPassword;
+                            user.Salt = newSalt;
+                            db.SaveChanges();
+
+                            if(newUsername != "")
+                            {
+                                return Json(new { success = true, message = "Kullanıcı adı ve Şifre başarıyla güncellendi." });
+                            }
+                            else
+                            {
+                                return Json(new { success = true, message = "Şifre başarıyla güncellendi." });
+                            }                          
                         }
-
-                        user.PasswordHash = newHashedPassword;
-                        user.Salt = newSalt;
-
-                        db.SaveChanges();
-
-                        return Json(new { success = true, message = "Şifre başarıyla güncellendi." });
+                        else
+                        {
+                            return Json(new { success = false, message = "Mevcut şifreniz hatalı." });
+                        }
                     }
                     else
                     {
-                        return Json(new { success = false, message = "Mevcut şifreniz hatalı." });
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "Kullanıcı adı başarıyla güncellendi." });
                     }
+                   
                 }
                 else
                 {

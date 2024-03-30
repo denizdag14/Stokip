@@ -16,12 +16,6 @@ namespace POStock.Controllers
             return View(musteriList);
         }
 
-        [HttpGet]
-        public ActionResult MusteriOlustur()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult MusteriOlustur(MUSTERI musteri)
         {

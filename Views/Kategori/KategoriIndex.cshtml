@@ -32,8 +32,20 @@
                     <tr style="text-align:center">
                         <td><b>@aktifSayac</b></td>
                         <td style="text-align:left">@Model[i].KategoriAd</td>
-                        <td><button data-id="@Model[i].KategoriID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#katGuncelle">Güncelle</button></td>
-                        <td><a class="btn btn-outline-danger" href="@Url.Action("KategoriSil", "Kategori", new {id = Model[i].KategoriID})" onclick="return confirmDelete()">Sil</a></td>
+                        <td>
+                            <span>
+                                <button data-id="@Model[i].KategoriID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#katGuncelle">
+                                    <i style="color:indigo" class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                <a class="btn btn-outline-danger" href="@Url.Action("KategoriSil", "Kategori", new {id = Model[i].KategoriID})" onclick="return confirmDelete()">
+                                    <i style="color:indigo" class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </span>
+                        </td>
                     </tr>
                     aktifSayac++;
                 }

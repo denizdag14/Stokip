@@ -9,23 +9,29 @@
         <div class="col-md-6">
             <div class="card shadow-lg p-3 mb-5 bg-body rounded">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Giriş Yap</h5>
-                    <form>
+                    <h5 class="card-title text-center mb-4"><i style="margin-right:5px; color:indigo;" class="fa-solid fa-arrow-right-to-bracket"></i>Giriş Yap</h5>
+                    <form id="formGirisYap">
                         <div class="input-group mb-3">
 
-                            <span class="input-group-text">Kullanıcı Adı: </span>
+                            <span class="input-group-text">
+                                <i style="margin-right:5px;" class="fa-solid fa-user"></i>
+                                <span>Kullanıcı Adı:</span>
+                            </span>
                             <input type="text" id="loginUsername" class="form-control" name="username" />
 
                         </div>
                         <div class="input-group mb-3">
 
-                            <span class="input-group-text">Şifre: </span>
+                            <span class="input-group-text">
+                                <i style="margin-right:5px;" class="fa-solid fa-key"></i>
+                                <span>Şifre:</span>
+                            </span>
                             <input type="password" id="loginPassword" class="form-control" name="password" />
 
                         </div>
                         <div>
-                            <button type="button" class="btn btn-success float-start btn-kayitOl" data-bs-toggle="modal" data-bs-target="#kayitOl">Kayıt Ol</button>
-                            <button type="button" class="btn btn-success float-end btn-girisYap">Giriş Yap</button>
+                            <button type="button" class="btn btn-success float-start btn-kayitOl" data-bs-toggle="modal" data-bs-target="#kayitOl"><i style="margin-right:5px;" class="fa-solid fa-user-plus"></i>Kayıt Ol</button>
+                            <button type="button" id="btnGirisYap" class="btn btn-success float-end btn-girisYap"><i style="margin-right:5px;" class="fa-solid fa-arrow-right-to-bracket"></i>Giriş Yap</button>
                         </div>
                     </form>
                 </div>
@@ -142,6 +148,19 @@
                 }
             });
         });
+
+        $('#formGirisYap').keypress(function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                $("#btnGirisYap").click();
+            }
+        })
+        $('#kayitOl').keypress(function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                $("#btnKayit").click();
+            }
+        })
 
     });
 </script>

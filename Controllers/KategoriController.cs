@@ -27,15 +27,6 @@ namespace POStock.Controllers
             return RedirectToAction("KategoriIndex");
         }
 
-        [HttpPost]
-        public ActionResult KategoriOlustur2(KATEGORI kat)
-        {
-            kat.IsActive = true;
-            db.KATEGORI.Add(kat);
-            db.SaveChanges();
-            return RedirectToAction("UrunOlustur", "Urun");
-        }
-
         public ActionResult KategoriSil(int id)
         {
             db.KATEGORI.Find(id).IsActive = false;

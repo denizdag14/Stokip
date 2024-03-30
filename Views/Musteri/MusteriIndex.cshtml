@@ -32,8 +32,20 @@
                     <tr style="text-align:center">
                         <td><b>@aktifSayac</b></td>
                         <td style="text-align:left;">@Model[i].MusteriAd @Model[i].MusteriSoyad</td>
-                        <td><button data-id="@Model[i].MusteriID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#musteriGuncelle">Güncelle</button></td>
-                        <td><a class="btn btn-outline-danger" href="@Url.Action("MusteriSil", "Musteri", new {id = Model[i].MusteriID})" onclick="return confirmDelete()">Sil</a></td>
+                        <td>
+                            <span>
+                                <button data-id="@Model[i].MusteriID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#musteriGuncelle">
+                                    <i style="color:indigo" class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                <a class="btn btn-outline-danger" href="@Url.Action("MusteriSil", "Musteri", new {id = Model[i].MusteriID})" onclick="return confirmDelete()">
+                                    <i style="color:indigo" class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </span>
+                        </td>
                     </tr>
                     aktifSayac++;
                 }
@@ -41,7 +53,8 @@
         </tbody>
 
     </table>
-    <a class="btn btn-success" href="@Url.Action("MusteriOlustur", "Musteri")">Yeni Müşteri</a>
+
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#musteriEkle">Yeni Müşteri</button>
 
 </div>
 
@@ -72,6 +85,41 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
                 <button type="button" id="btnSave" class="btn btn-success">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="musteriEkle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Yeni Müşteri</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" action="@Url.Action("MusteriOlustur", "Musteri")">
+
+                    <input type="hidden" id="musteriId" name="MusteriID">
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="musteriAdi">Müşteri Adı:</label></span>
+                        <input type="text" class="form-control" id="musteriAdi" name="MusteriAd">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><label for="musteriSoyadi">Müşteri Soyadı:</label></span>
+                        <input type="text" class="form-control" id="musteriSoyadi" name="MusteriSoyad">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" id="katEklebtnSave" class="btn btn-success">Kaydet</button>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>

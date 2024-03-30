@@ -41,12 +41,18 @@
                     <td style="text-align:right">@ViewBag.satisList[i].ToplamFiyat ₺</td>
                     @if (ViewBag.satisList[i].URUN.IsActive == true)
                     {
-                        <td><a class="btn btn-outline-danger" href="@Url.Action("SatisSil", "Satis", new { id = ViewBag.satisList[i].SatisID })" onclick="return confirmDelete()">Sil</a></td>
+                        <td>
+                            <span>
+                                <a class="btn btn-outline-danger" href="@Url.Action("SatisSil", "Satis", new { id = ViewBag.satisList[i].SatisID })" onclick="return confirmDelete()"><i style="color:indigo" class="fa-solid fa-trash-can"></i></a>
+                            </span>
+                        </td>
                     }
                     else
                     {
                         <td>
-                            <a class="btn btn-outline-danger disabled">Sil</a>
+                            <span tabindex="0" data-bs-toggle="tooltip" title="Kaldırılmış ürünün satışı silinemez.">
+                                <a class="btn btn-outline-danger disabled"><i style="color:indigo" class="fa-solid fa-trash-can"></i></a>
+                            </span>
                         </td>
                     }
 
@@ -75,7 +81,7 @@
                 <form method="post">
 
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="urun">Ürün:</label></span>
+                        <span class="input-group-text"><label for="urun"><i style="margin-right:5px;" class="fa-solid fa-box"></i>Ürün:</label></span>
                         <select class="form-select" id="urun" name="Urun">
                             @foreach (var item in ViewBag.urunList)
                             {
@@ -87,7 +93,7 @@
                         </select>
                     </div>
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="musteri">Müşteri:</label></span>
+                        <span class="input-group-text"><label for="musteri"><i style="margin-right:5px;" class="fa-solid fa-user"></i>Müşteri:</label></span>
                         <select class="form-select" id="musteri" name="Musteri">
                             @foreach (var item in ViewBag.musteriList)
                             {
@@ -99,11 +105,11 @@
                         </select>
                     </div>
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="adet">Adet:</label></span>
+                        <span class="input-group-text"><label for="adet"><i style="margin-right:5px;" class="fa-solid fa-arrow-up-9-1"></i>Adet:</label></span>
                         <input type="number" class="form-control" id="adet" name="Adet">
                     </div>
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="toplamFiyat">Toplam Fiyat:</label></span>
+                        <span class="input-group-text"><label for="toplamFiyat"><i style="margin-right:5px;" class="fa-solid fa-tag"></i>Toplam Fiyat:</label></span>
                         <input type="text" oninput="formatFiyat(this.value)" class="form-control" id="toplamFiyat" name="ToplamFiyat">
                         <span class="input-group-text custom-price">₺</span>
                     </div>
@@ -123,6 +129,12 @@
 <script>
 
     $(document).ready(function () {
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
         $('#myTable').DataTable({
             "columnDefs": [
                 { "width": "10px", "targets": 0 },
@@ -139,6 +151,7 @@
                 $("#btnSave").click();
             }
         })
+
     });
 
     function submitForm() {

@@ -40,8 +40,20 @@
                         <td style="text-align:left">@Model[i].UrunAd</td>
                         <td style="text-align:left">@Model[i].KATEGORI.KategoriAd</td>
                         <td>@Model[i].Stok</td>
-                        <td><button data-id="@Model[i].UrunID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#urunGuncelle">Güncelle</button></td>
-                        <td><a class="btn btn-outline-danger" href="@Url.Action("UrunSil", "Urun", new { id = Model[i].UrunID })" onclick="return confirmDelete()">Sil</a></td>
+                        <td>
+                            <span>
+                                <button data-id="@Model[i].UrunID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#urunGuncelle">
+                                    <i style="color:indigo" class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                <a class="btn btn-outline-danger" href="@Url.Action("UrunSil", "Urun", new { id = Model[i].UrunID })" onclick="return confirmDelete()">
+                                    <i style="color:indigo" class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </span>
+                        </td>
                     </tr>
                 }
                 aktifSayac++;
@@ -49,7 +61,7 @@
         </tbody>
 
     </table>
-    <a class="btn btn-success" href="@Url.Action("UrunOlustur", "Urun")">Yeni Ürün</a>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#urunEkle">Yeni Ürün</button>
 
 </div>
 
@@ -97,9 +109,53 @@
     </div>
 </div>
 
+<div class="modal fade" id="urunEkle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Yeni Ürün</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" action="@Url.Action("UrunOlustur", "Urun")">
+
+                    <input type="hidden" id="katId" name="UrunID">
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="urunAdi">Ürün Adı:</label></span>
+                        <input type="text" class="form-control" id="urunAdi" name="UrunAd">
+                    </div>
+
+                    <div class="input-group mb-3 form-group">
+                        <span class="input-group-text"><label for="kat"><i style="margin-right:5px;" class="fa-solid fa-box"></i>Kategori:</label></span>
+                        <select class="form-select" id="kat" name="Kategori">
+                            @foreach (var item in ViewBag.katList)
+                            {
+                                if (item.IsActive == true)
+                                {
+                                    <option value="@item.KategoriID">@item.KategoriAd</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" id="urunEklebtnSave" class="btn btn-success">Kaydet</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 
     $(document).ready(function () {
+
         $('#myTable').DataTable({
             "columnDefs": [
                 { "width": "10px", "targets": 0 },
