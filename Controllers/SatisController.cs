@@ -22,7 +22,7 @@ namespace POStock.Controllers
         }
 
         [HttpPost]
-        public ActionResult SatisOlustur(short Urun, short Musteri, int Adet, string ToplamFiyat)
+        public ActionResult SatisOlustur(short Urun, short Musteri, string Adet, string ToplamFiyat)
         {
             SATIS satis = new SATIS();
             satis.ToplamFiyat = Convert.ToDecimal(ToplamFiyat.Replace(",", "_").Replace(".", ",").Replace("_", "."));
@@ -30,7 +30,7 @@ namespace POStock.Controllers
             satis.Urun = Urun;
             satis.MUSTERI = db.MUSTERI.Find(Musteri);
             satis.URUN = db.URUN.Find(Urun);
-            satis.Adet = Adet;
+            satis.Adet = Convert.ToInt32(Adet);
             satis.BirimFiyat = satis.ToplamFiyat / satis.Adet;
             satis.IsActive = true;
             if(satis.URUN.Stok == 0 || satis.Adet > satis.URUN.Stok)

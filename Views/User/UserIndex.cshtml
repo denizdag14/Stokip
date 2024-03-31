@@ -27,6 +27,7 @@
                                 <span>Şifre:</span>
                             </span>
                             <input type="password" id="loginPassword" class="form-control" name="password" />
+                            <button class="btn btn-success" type="button" id="toggleLoginPassword"><i class="fa-solid fa-eye"></i></button>
 
                         </div>
                         <div>
@@ -53,20 +54,22 @@
 
                     <div class="input-group mb-3">
 
-                        <span class="input-group-text">Kullanıcı Adı: </span>
+                        <span class="input-group-text"><i style="margin-right:5px;" class="fa-solid fa-user"></i>Kullanıcı Adı: </span>
                         <input type="text" id="registerUsername" class="form-control" name="username" />
 
                     </div>
                     <div class="input-group mb-3">
 
-                        <span class="input-group-text">Şifre: </span>
+                        <span class="input-group-text"><i style="margin-right:5px;" class="fa-solid fa-key"></i>Şifre: </span>
                         <input type="password" id="registerPassword" class="form-control" name="password" />
+                        <button class="btn btn-success" type="button" id="toggleRegisterPassword"><i class="fa-solid fa-eye"></i></button>
 
                     </div>
                     <div class="input-group mb-3">
 
-                        <span class="input-group-text">Şifre Tekrarı: </span>
-                        <input type="password" id="registerPasswordControl" class="form-control"/>
+                        <span class="input-group-text"><i style="margin-right:5px;" class="fa-solid fa-key"></i>Şifre Tekrarı: </span>
+                        <input type="password" id="registerPasswordControl" class="form-control" />
+                        <button class="btn btn-success" type="button" id="toggleConfirmPassword"><i class="fa-solid fa-eye"></i></button>
 
                     </div>
 
@@ -92,6 +95,43 @@
 
 <script>
     $(document).ready(function () {
+
+        $('#toggleLoginPassword').click(function () {
+            var passwordField = $('#loginPassword');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType == 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        $('#toggleRegisterPassword').click(function () {
+            var passwordField = $('#registerPassword');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType == 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        $('#toggleConfirmPassword').click(function () {
+            var passwordField = $('#registerPasswordControl');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType == 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
         $('#btnKayit').click(function () {
             var username = $('#registerUsername').val();
             var password = $('#registerPassword').val();

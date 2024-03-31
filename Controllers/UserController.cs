@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace POStock.Controllers
 {
+
     public class UserController : Controller
     {
 

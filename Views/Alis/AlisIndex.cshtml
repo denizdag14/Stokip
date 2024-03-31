@@ -95,7 +95,7 @@
                     <div class="input-group mb-3">
 
                         <span class="input-group-text"><label for="adet"><i style="margin-right:5px;" class="fa-solid fa-arrow-up-9-1"></i>Adet:</label></span>
-                        <input type="number" class="form-control" id="adet" name="Adet" />
+                        <input type="text" class="form-control" id="adet" name="Adet" />
 
                     </div>
 
@@ -122,6 +122,19 @@
 <script>
 
     $(document).ready(function () {
+
+        $('#adet').on('input', function () {
+
+            var input = $(this).val();
+            var regex = /[^0-9]/g;
+            var sanitizedInput = input.replace(regex, '');
+
+            if (sanitizedInput.startsWith("0")) {
+                sanitizedInput = sanitizedInput.slice(1);
+                $(this).val(sanitizedInput);
+            }
+            $(this).val(sanitizedInput);
+        });
 
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

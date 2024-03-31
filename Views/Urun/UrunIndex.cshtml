@@ -78,11 +78,11 @@
 
                     <input type="hidden" id="urunId" name="UrunID">
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="urunAdi">Ürün Adı:</label></span>
+                        <span class="input-group-text"><label for="urunAdi"><i style="margin-right:5px;" class="fa-solid fa-box"></i>Ürün Adı:</label></span>
                         <input type="text" class="form-control" id="urunAdi" name="UrunAd">
                     </div>
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="kategori">Ürün Kategorisi:</label></span>
+                        <span class="input-group-text"><label for="kategori"><i style="margin-right:5px;" class="fa-solid fa-tag"></i>Ürün Kategorisi:</label></span>
                         <select class="form-select" id="kategori" name="UrunKategori">
                             @foreach (var kat in ViewBag.katList)
                             {
@@ -94,7 +94,7 @@
                         </select>
                     </div>
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="stok">Stok:</label></span>
+                        <span class="input-group-text"><label for="stok"><i style="margin-right:5px;" class="fa-solid fa-arrow-up-9-1"></i>Stok:</label></span>
                         <input type="number" class="form-control" id="stok" name="Stok">
                     </div>
 
@@ -123,12 +123,12 @@
 
                     <input type="hidden" id="katId" name="UrunID">
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="urunAdi">Ürün Adı:</label></span>
+                        <span class="input-group-text"><label for="urunAdi"><i style="margin-right:5px;" class="fa-solid fa-box"></i>Ürün Adı:</label></span>
                         <input type="text" class="form-control" id="urunAdi" name="UrunAd">
                     </div>
 
                     <div class="input-group mb-3 form-group">
-                        <span class="input-group-text"><label for="kat"><i style="margin-right:5px;" class="fa-solid fa-box"></i>Kategori:</label></span>
+                        <span class="input-group-text"><label for="kat"><i style="margin-right:5px;" class="fa-solid fa-tag"></i>Kategori:</label></span>
                         <select class="form-select" id="kat" name="Kategori">
                             @foreach (var item in ViewBag.katList)
                             {
@@ -155,6 +155,22 @@
 <script>
 
     $(document).ready(function () {
+
+        $('#stok').on('input', function () {
+
+            var stokDeger = $(this).val();
+            var strStok = stokDeger.toString();
+
+            if (strStok.startsWith("0") && strStok.length > 1) {
+                strStok = strStok.slice(1);
+                stokDeger = parseInt(strStok);
+                $(this).val(stokDeger);
+            }
+
+            if (stokDeger < 0 || stokDeger === '') {
+                $(this).val('0');
+            }
+        });
 
         $('#myTable').DataTable({
             "columnDefs": [

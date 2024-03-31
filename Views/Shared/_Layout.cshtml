@@ -99,14 +99,17 @@
                         <div class="input-group mb-3 form-group">
                             <span class="input-group-text"><label for="changePasswordOld" class="form-label"><i style="margin-right:5px;" class="fa-solid fa-key"></i>Mevcut Şifre:</label></span>
                             <input placeholder="Değişikleri kaydedebilmeniz için mevcut şifrenizi girin." type="password" class="form-control" id="changePasswordOld" name="oldPassword">
+                            <button class="btn btn-success" type="button" id="toggleOldPassword"><i class="fa-solid fa-eye"></i></button>
                         </div>
                         <div class="input-group mb-3 form-group">
                             <span class="input-group-text"><label for="changePasswordNew" class="form-label"><i style="margin-right:5px;" class="fa-solid fa-key"></i>Yeni Şifre:</label></span>
                             <input placeholder="Değiştirmek istemiyorsanız boş bırakın." type="password" class="form-control" id="changePasswordNew" name="newPassword">
+                            <button class="btn btn-success" type="button" id="toggleNewPassword"><i class="fa-solid fa-eye"></i></button>
                         </div>
                         <div class="input-group mb-3 form-group">
                             <span class="input-group-text"><label for="changePasswordConfirm" class="form-label"><i style="margin-right:5px;" class="fa-solid fa-key"></i>Yeni Şifre Tekrar:</label></span>
                             <input type="password" class="form-control" id="changePasswordConfirm" name="confirmPassword">
+                            <button class="btn btn-success" type="button" id="toggleConfirmPassword"><i class="fa-solid fa-eye"></i></button>
                         </div>
                     </form>
                 </div>
@@ -133,7 +136,44 @@
 
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+
+        $('#toggleOldPassword').click(function () {
+            var passwordField = $('#changePasswordOld');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType == 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        $('#toggleNewPassword').click(function () {
+            var passwordField = $('#changePasswordNew');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType == 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        $('#toggleConfirmPassword').click(function () {
+            var passwordField = $('#changePasswordConfirm');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType == 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
         $('.dropdown-toggle').click(function() {
             var dropdownMenu = $(this).next('.dropdown-menu');
             dropdownMenu.toggleClass('show');

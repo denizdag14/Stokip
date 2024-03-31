@@ -19,10 +19,10 @@ namespace POStock.Controllers
         }
 
         [HttpPost]
-        public ActionResult AlisOlustur(short Urun, int Adet, string ToplamFiyat)
+        public ActionResult AlisOlustur(short Urun, string Adet, string ToplamFiyat)
         {
             ALIS alis = new ALIS();
-            alis.Adet = Adet;
+            alis.Adet = Convert.ToInt32(Adet);
             alis.ToplamFiyat = Convert.ToDecimal(ToplamFiyat.Replace(",", "_").Replace(".", ",").Replace("_", "."));
             alis.URUN = db.URUN.Find(Urun);
             alis.BirimFiyat = alis.ToplamFiyat / alis.Adet;
