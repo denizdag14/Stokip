@@ -36,8 +36,8 @@
                     <td style="text-align:left">@Model[i].URUN.UrunAd</td>
                     <td style="text-align:left">@Model[i].URUN.KATEGORI.KategoriAd</td>
                     <td>@Model[i].Adet</td>
-                    <td style="text-align:right">@Model[i].BirimFiyat ₺</td>
-                    <td style="text-align:right">@Model[i].ToplamFiyat ₺</td>
+                    <td style="text-align:right">@String.Format("{0:N2} ₺", @Model[i].BirimFiyat)</td>
+                    <td style="text-align:right">@String.Format("{0:N2} ₺", @Model[i].ToplamFiyat)</td>
                     @if (Model[i].URUN.IsActive == true)
                     {
                         <td>

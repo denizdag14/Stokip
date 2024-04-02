@@ -37,8 +37,8 @@
                     <td style="text-align:left">@ViewBag.satisList[i].URUN.KATEGORI.KategoriAd</td>
                     <td style="text-align:left;">@ViewBag.satisList[i].MUSTERI.MusteriAd @ViewBag.satisList[i].MUSTERI.MusteriSoyad</td>
                     <td>@ViewBag.satisList[i].Adet</td>
-                    <td style="text-align:right">@ViewBag.satisList[i].BirimFiyat ₺</td>
-                    <td style="text-align:right">@ViewBag.satisList[i].ToplamFiyat ₺</td>
+                    <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].BirimFiyat)</td>
+                    <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].ToplamFiyat)</td>
                     @if (ViewBag.satisList[i].URUN.IsActive == true)
                     {
                         <td>

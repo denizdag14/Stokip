@@ -14,9 +14,8 @@
                 <div id="salesPieChart"></div>
             </div>
             <div style="display:none;" id="salesEmptyAlert" class="alert custom-alert d-none" role="alert">
-                @*<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill" /></svg>*@
-                <i class="fa-solid fa-chart-pie"><span>Satışlar tablosunda henüz ürün satışı bulunmamaktadır.</span></i>
-                
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Satışlar tablosunda henüz ürün satışı bulunmamaktadır.</span>
             </div>
 
         </div>
@@ -54,8 +53,8 @@
                                 <td style="text-align:left">@ViewBag.satisList[i].URUN.KATEGORI.KategoriAd</td>
                                 <td style="text-align:left;">@ViewBag.satisList[i].MUSTERI.MusteriAd @ViewBag.satisList[i].MUSTERI.MusteriSoyad</td>
                                 <td>@ViewBag.satisList[i].Adet</td>
-                                <td style="text-align:right">@ViewBag.satisList[i].BirimFiyat ₺</td>
-                                <td style="text-align:right">@ViewBag.satisList[i].ToplamFiyat ₺</td>
+                                <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].BirimFiyat)</td>
+                                <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].ToplamFiyat)</td>
                             </tr>
                             sayac++;
                             //}
@@ -77,7 +76,6 @@
                 <div id="purchasesPieChart"></div>
             </div>
             <div style="display:none;" id="purchasesEmptyAlert" class="alert custom-alert d-none" role="alert">
-                @*<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill" /></svg>*@
                 <i class="fa-solid fa-chart-pie"></i>
                 <span>Alışlar tablosunda henüz ürün alışı bulunmamaktadır.</span>
             </div>
@@ -115,8 +113,8 @@
                                 <td style="text-align:left">@Model[i].URUN.UrunAd</td>
                                 <td style="text-align:left">@Model[i].URUN.KATEGORI.KategoriAd</td>
                                 <td>@Model[i].Adet</td>
-                                <td style="text-align:right">@Model[i].BirimFiyat ₺</td>
-                                <td style="text-align:right">@Model[i].ToplamFiyat ₺</td>
+                                <td style="text-align:right">@String.Format("{0:N2} ₺", @Model[i].BirimFiyat)</td>
+                                <td style="text-align:right">@String.Format("{0:N2} ₺", @Model[i].ToplamFiyat)</td>
                             </tr>
                             sayac2++;
                         //}
