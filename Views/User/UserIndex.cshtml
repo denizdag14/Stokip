@@ -58,6 +58,7 @@
                         <input type="text" id="registerUsername" class="form-control" name="username" />
 
                     </div>
+
                     <div class="input-group mb-3">
 
                         <span class="input-group-text"><i style="margin-right:5px;" class="fa-solid fa-key"></i>Şifre: </span>
@@ -152,10 +153,10 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        alert("Kayıt başarılı!");
+                        alert(response.message);
                         window.location.href = '@Url.Action("UserIndex", "User")';
                     } else {
-                        alert("Kayıt başarısız!");
+                        alert(response.message);
                     }
                 },
                 error: function () {
@@ -163,6 +164,7 @@
                 }
             });
         });
+
 
         $('.btn-girisYap').click(function () {
             var username = $('#loginUsername').val();

@@ -55,7 +55,7 @@ namespace POStock.Controllers
                 db.USERS.Add(newUser);
                 db.SaveChanges();
 
-                return Json(new { success = true });
+                return Json(new { success = true, message = "Kayıt başarılı." });
             }
             catch (Exception ex)
             {
@@ -177,30 +177,24 @@ public class PasswordHasher
     public static string HashPassword(string password, string salt)
     {
         using (SHA256 sha256Hash = SHA256.Create())
-        {
-            // Şifreyi ve tuzu birleştir
+        {         
             string combinedString = password + salt;
 
-            // Birleşik stringi byte dizisine dönüştür
             byte[] bytes = Encoding.UTF8.GetBytes(combinedString);
 
-            // Hash değerini hesapla
             byte[] hashBytes = sha256Hash.ComputeHash(bytes);
 
-            // Hash değerini string olarak dönüştür ve geri döndür
             return Convert.ToBase64String(hashBytes);
         }
     }
 
     public static string GenerateSalt(int length)
     {
-        // Rastgele bir salt oluştur
         byte[] randomBytes = new byte[length];
         using (var rng = new RNGCryptoServiceProvider())
         {
             rng.GetBytes(randomBytes);
         }
-        // Rastgele byte dizisini string olarak dönüştür
         return Convert.ToBase64String(randomBytes);
     }
 }
