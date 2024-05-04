@@ -45,8 +45,8 @@
                     @for (int i = ViewBag.satisList.Count - 1; i >= 0; i--)
                     {
 
-                        //if (ViewBag.satisList[i].URUN.IsActive == true)
-                        //{
+                        if (ViewBag.satisList[i].SatisUser == (short)Session["userID"])
+                        {
                             <tr style="text-align:center">
                                 <td><b>@sayac</b></td>
                                 <td style="text-align:left;">@ViewBag.satisList[i].URUN.UrunAd</td>
@@ -57,9 +57,9 @@
                                 <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].ToplamFiyat)</td>
                             </tr>
                             sayac++;
-                            //}
-
                         }
+
+                    }
                 </tbody>
 
             </table>
@@ -106,8 +106,8 @@
                     @for (int i = Model.Count - 1; i >= 0; i--)
                     {
 
-                        //if (Model[i].URUN.IsActive == true)
-                        //{
+                        if (Model[i].AlisUser == (short)Session["userID"])
+                        {
                             <tr style="text-align:center">
                                 <td><b>@sayac2</b></td>
                                 <td style="text-align:left">@Model[i].URUN.UrunAd</td>
@@ -117,7 +117,7 @@
                                 <td style="text-align:right">@String.Format("{0:N2} ₺", @Model[i].ToplamFiyat)</td>
                             </tr>
                             sayac2++;
-                        //}
+                        }
 
                     }
                 </tbody>

@@ -14,6 +14,10 @@ namespace POStock.Controllers
 
         public ActionResult MainIndex()
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect(Url.Action("UserIndex", "User"));
+            }
             var urunList = db.URUN.ToList();
             var musteriList = db.MUSTERI.ToList();
             ViewBag.urunList = urunList;
@@ -26,7 +30,9 @@ namespace POStock.Controllers
 
         public JsonResult GetSalesData()
         {
+            short userID = (short)Session["userID"];
             var salesData = db.SATIS
+                .Where(u => u.SatisUser == userID)
                 .GroupBy(a => new { a.Urun, a.URUN.UrunAd })
                 .Select(g => new { ProductName = g.Key.UrunAd, TotalQuantity = g.Sum(a => a.Adet) })
                 .ToList();
@@ -36,7 +42,9 @@ namespace POStock.Controllers
 
         public JsonResult GetPurchasesData()
         {
+            short userID = (short)Session["userID"];
             var purchasesData = db.ALIS
+                .Where(u => u.AlisUser == userID)
                 .GroupBy(a => new { a.Urun, a.URUN.UrunAd })
                 .Select(g => new { ProductName = g.Key.UrunAd, TotalQuantity = g.Sum(a => a.Adet) })
                 .ToList();

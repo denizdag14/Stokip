@@ -15,6 +15,11 @@
         <AssociationConnector Association="DbStockModel.FK_SATIS_MUSTERI1" ManuallyRouted="false" />
         <AssociationConnector Association="DbStockModel.FK_SATIS_URUN1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DbStockModel.USERS" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="DbStockModel.FK_ALIS_USERS" />
+        <AssociationConnector Association="DbStockModel.FK_KATEGORI_USERS" />
+        <AssociationConnector Association="DbStockModel.FK_MUSTERI_USERS" />
+        <AssociationConnector Association="DbStockModel.FK_SATIS_USERS" />
+        <AssociationConnector Association="DbStockModel.FK_URUN_USERS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

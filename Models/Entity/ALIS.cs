@@ -30,9 +30,13 @@ public partial class ALIS
 
     public Nullable<bool> IsActive { get; set; }
 
+    public Nullable<short> AlisUser { get; set; }
+
 
 
     public virtual URUN URUN { get; set; }
+
+    public virtual USERS USERS { get; set; }
 
 }
 

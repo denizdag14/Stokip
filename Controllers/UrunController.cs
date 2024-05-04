@@ -14,6 +14,10 @@ namespace POStock.Controllers
 
         public ActionResult UrunIndex()
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect(Url.Action("UserIndex", "User"));
+            }
             var urunList = db.URUN.ToList();
             ViewBag.katList = db.KATEGORI.ToList();
             return View(urunList);
@@ -27,6 +31,7 @@ namespace POStock.Controllers
             urun.UrunKategori = Kategori;
             urun.Stok = 0;
             urun.IsActive = true;
+            urun.UrunUser = (short)Session["userID"];
             db.URUN.Add(urun);
             db.SaveChanges();
             return RedirectToAction("UrunIndex");

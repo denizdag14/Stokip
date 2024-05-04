@@ -39,6 +39,8 @@ public partial class URUN
 
     public Nullable<bool> IsActive { get; set; }
 
+    public Nullable<short> UrunUser { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -50,6 +52,8 @@ public partial class URUN
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<SATIS> SATIS { get; set; }
+
+    public virtual USERS USERS { get; set; }
 
 }
 

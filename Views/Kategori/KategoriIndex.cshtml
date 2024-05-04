@@ -27,7 +27,7 @@
 
             @for (int i = Model.Count - 1; i >= 0; i--)
             {
-                if (Model[i].IsActive == true)
+                if (Model[i].IsActive == true && Model[i].KategoriUser == (short)Session["userID"])
                 {
                     <tr style="text-align:center">
                         <td><b>@aktifSayac</b></td>

@@ -12,6 +12,10 @@ namespace POStock.Controllers
         DbStockEntities db = new DbStockEntities();
         public ActionResult MusteriIndex()
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect(Url.Action("UserIndex", "User"));
+            }
             var musteriList = db.MUSTERI.ToList();
             return View(musteriList);
         }
@@ -20,6 +24,7 @@ namespace POStock.Controllers
         public ActionResult MusteriOlustur(MUSTERI musteri)
         {
             musteri.IsActive = true;
+            musteri.MusteriUser = (short)Session["userID"];
             db.MUSTERI.Add(musteri);
             db.SaveChanges();
             return RedirectToAction("MusteriIndex");

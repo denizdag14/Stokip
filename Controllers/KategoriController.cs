@@ -14,6 +14,10 @@ namespace POStock.Controllers
         DbStockEntities db = new DbStockEntities();
         public ActionResult KategoriIndex()
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect(Url.Action("UserIndex", "User"));
+            }
             var kategoriList = db.KATEGORI.ToList();
             return View(kategoriList);
         }
@@ -22,6 +26,7 @@ namespace POStock.Controllers
         public ActionResult KategoriOlustur(KATEGORI kat)
         {
             kat.IsActive = true;
+            kat.KategoriUser = (short)Session["userID"];
             db.KATEGORI.Add(kat);
             db.SaveChanges();
             return RedirectToAction("KategoriIndex");

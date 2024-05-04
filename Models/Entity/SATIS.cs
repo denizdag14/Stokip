@@ -32,11 +32,15 @@ public partial class SATIS
 
     public Nullable<bool> IsActive { get; set; }
 
+    public Nullable<short> SatisUser { get; set; }
+
 
 
     public virtual MUSTERI MUSTERI { get; set; }
 
     public virtual URUN URUN { get; set; }
+
+    public virtual USERS USERS { get; set; }
 
 }
 

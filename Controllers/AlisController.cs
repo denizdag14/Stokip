@@ -12,6 +12,10 @@ namespace POStock.Controllers
         DbStockEntities db = new DbStockEntities();
         public ActionResult AlisIndex()
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect(Url.Action("UserIndex", "User"));
+            }
             var alisList = db.ALIS.ToList();
             var urunList = db.URUN.ToList();
             ViewBag.urunList = urunList;
@@ -26,6 +30,7 @@ namespace POStock.Controllers
             alis.ToplamFiyat = Convert.ToDecimal(ToplamFiyat.Replace(",", "_").Replace(".", ",").Replace("_", "."));
             alis.URUN = db.URUN.Find(Urun);
             alis.BirimFiyat = alis.ToplamFiyat / alis.Adet;
+            alis.AlisUser = (short)Session["userID"];
             alis.IsActive = true;
             db.ALIS.Add(alis);
             alis.URUN.Stok = (short?)(alis.URUN.Stok + (short)alis.Adet);

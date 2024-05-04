@@ -12,6 +12,10 @@ namespace POStock.Controllers
         DbStockEntities db = new DbStockEntities();
         public ActionResult SatisIndex()
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect(Url.Action("UserIndex", "User"));
+            }
             var urunList = db.URUN.ToList();
             var musteriList = db.MUSTERI.ToList();
             ViewBag.urunList = urunList;
@@ -32,6 +36,7 @@ namespace POStock.Controllers
             satis.URUN = db.URUN.Find(Urun);
             satis.Adet = Convert.ToInt32(Adet);
             satis.BirimFiyat = satis.ToplamFiyat / satis.Adet;
+            satis.SatisUser = (short)Session["userID"];
             satis.IsActive = true;
             if(satis.URUN.Stok == 0 || satis.Adet > satis.URUN.Stok)
             {

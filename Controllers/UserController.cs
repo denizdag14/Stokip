@@ -77,6 +77,7 @@ namespace POStock.Controllers
 
                     if (user.PasswordHash == hashedPassword)
                     {
+                        Session["userID"] = user.UserID;
                         userNameCookie.Value = user.Username;
                         Response.Cookies.Add(userNameCookie);
                         return Json(new { success = true });
@@ -105,6 +106,7 @@ namespace POStock.Controllers
                 userNameCookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(userNameCookie);
             }
+            Session.Remove("userID");
             return RedirectToAction("UserIndex", "User");
         }
 
