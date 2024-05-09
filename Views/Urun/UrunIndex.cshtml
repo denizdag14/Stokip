@@ -36,30 +36,27 @@
                 else
                 {
 
-                    if (Model[i].UrunUser == (short)Session["userID"])
-                    {
-                        <tr style="text-align:center">
-                            <td><b>@aktifSayac</b></td>
-                            <td style="text-align:left">@Model[i].UrunAd</td>
-                            <td style="text-align:left">@Model[i].KATEGORI.KategoriAd</td>
-                            <td>@Model[i].Stok</td>
-                            <td>
-                                <span>
-                                    <button data-id="@Model[i].UrunID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#urunGuncelle">
-                                        <i style="color:indigo" class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    <a class="btn btn-outline-danger" href="@Url.Action("UrunSil", "Urun", new { id = Model[i].UrunID })" onclick="return confirmDelete()">
-                                        <i style="color:indigo" class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        aktifSayac++;
-                    }
+                    <tr style="text-align:center">
+                        <td><b>@aktifSayac</b></td>
+                        <td style="text-align:left">@Model[i].UrunAd</td>
+                        <td style="text-align:left">@Model[i].KATEGORI.KategoriAd</td>
+                        <td>@Model[i].Stok</td>
+                        <td>
+                            <span>
+                                <button data-id="@Model[i].UrunID" type="button" class="btn btn-outline-warning btn-guncelle" data-bs-toggle="modal" data-bs-target="#urunGuncelle">
+                                    <i style="color:indigo" class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                <a class="btn btn-outline-danger" href="@Url.Action("UrunSil", "Urun", new { id = Model[i].UrunID })" onclick="return confirmDelete()">
+                                    <i style="color:indigo" class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    aktifSayac++;
                 }
             }
         </tbody>
@@ -90,7 +87,7 @@
                         <select class="form-select" id="kategori" name="UrunKategori">
                             @foreach (var kat in ViewBag.katList)
                             {
-                                if (kat.IsActive == true && kat.KategoriUser == (short)Session["userID"])
+                                if (kat.IsActive == true)
                                 {
                                     <option value="@kat.KategoriID">@kat.KategoriAd</option>
                                 }
@@ -136,7 +133,7 @@
                         <select class="form-select" id="kat" name="Kategori">
                             @foreach (var item in ViewBag.katList)
                             {
-                                if (item.IsActive == true && item.KategoriUser == (short)Session["userID"])
+                                if (item.IsActive == true)
                                 {
                                     <option value="@item.KategoriID">@item.KategoriAd</option>
                                 }

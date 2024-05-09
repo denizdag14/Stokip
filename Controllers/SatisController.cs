@@ -14,13 +14,14 @@ namespace POStock.Controllers
         {
             if (Session["userID"] == null)
             {
-                Response.Redirect(Url.Action("UserIndex", "User"));
+                return RedirectToAction("UserIndex", "User");
             }
-            var urunList = db.URUN.ToList();
-            var musteriList = db.MUSTERI.ToList();
+            short userID = (short)Session["userID"];
+            var urunList = db.URUN.Where(u => u.UrunUser == userID).ToList();
+            var musteriList = db.MUSTERI.Where(u => u.MusteriUser == userID).ToList();
+            var satisList = db.SATIS.Where(u => u.SatisUser == userID).ToList();
             ViewBag.urunList = urunList;
             ViewBag.musteriList = musteriList;
-            var satisList = db.SATIS.ToList();
             ViewBag.satisList = satisList;
             return View();
         }

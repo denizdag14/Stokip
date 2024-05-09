@@ -16,9 +16,10 @@ namespace POStock.Controllers
         {
             if (Session["userID"] == null)
             {
-                Response.Redirect(Url.Action("UserIndex", "User"));
+                return RedirectToAction("UserIndex", "User");
             }
-            var kategoriList = db.KATEGORI.ToList();
+            short userID = (short)Session["userID"];
+            var kategoriList = db.KATEGORI.Where(u => u.KategoriUser == userID).ToList();
             return View(kategoriList);
         }
 

@@ -31,36 +31,33 @@
             @for (int i = ViewBag.satisList.Count - 1; i >= 0; i--)
             {
 
-                if (ViewBag.satisList[i].SatisUser == (short)Session["userID"])
-                {
-                    <tr style="text-align:center">
-                        <td><b>@sayac</b></td>
-                        <td style="text-align:left;">@ViewBag.satisList[i].URUN.UrunAd</td>
-                        <td style="text-align:left">@ViewBag.satisList[i].URUN.KATEGORI.KategoriAd</td>
-                        <td style="text-align:left;">@ViewBag.satisList[i].MUSTERI.MusteriAd @ViewBag.satisList[i].MUSTERI.MusteriSoyad</td>
-                        <td>@ViewBag.satisList[i].Adet</td>
-                        <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].BirimFiyat)</td>
-                        <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].ToplamFiyat)</td>
-                        @if (ViewBag.satisList[i].URUN.IsActive == true)
-                        {
-                            <td>
-                                <span>
-                                    <a class="btn btn-outline-danger" href="@Url.Action("SatisSil", "Satis", new { id = ViewBag.satisList[i].SatisID })" onclick="return confirmDelete()"><i style="color:indigo" class="fa-solid fa-trash-can"></i></a>
-                                </span>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                <span tabindex="0" data-bs-toggle="tooltip" title="Kaldırılmış ürünün satışı silinemez.">
-                                    <a class="btn btn-outline-danger disabled"><i style="color:indigo" class="fa-solid fa-trash-can"></i></a>
-                                </span>
-                            </td>
-                        }
+                <tr style="text-align:center">
+                    <td><b>@sayac</b></td>
+                    <td style="text-align:left;">@ViewBag.satisList[i].URUN.UrunAd</td>
+                    <td style="text-align:left">@ViewBag.satisList[i].URUN.KATEGORI.KategoriAd</td>
+                    <td style="text-align:left;">@ViewBag.satisList[i].MUSTERI.MusteriAd @ViewBag.satisList[i].MUSTERI.MusteriSoyad</td>
+                    <td>@ViewBag.satisList[i].Adet</td>
+                    <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].BirimFiyat)</td>
+                    <td style="text-align:right">@String.Format("{0:N2} ₺", @ViewBag.satisList[i].ToplamFiyat)</td>
+                    @if (ViewBag.satisList[i].URUN.IsActive == true)
+                    {
+                        <td>
+                            <span>
+                                <a class="btn btn-outline-danger" href="@Url.Action("SatisSil", "Satis", new { id = ViewBag.satisList[i].SatisID })" onclick="return confirmDelete()"><i style="color:indigo" class="fa-solid fa-trash-can"></i></a>
+                            </span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <span tabindex="0" data-bs-toggle="tooltip" title="Kaldırılmış ürünün satışı silinemez.">
+                                <a class="btn btn-outline-danger disabled"><i style="color:indigo" class="fa-solid fa-trash-can"></i></a>
+                            </span>
+                        </td>
+                    }
 
-                    </tr>
-                    sayac++;
-                }
+                </tr>
+                sayac++;
 
             }
         </tbody>
@@ -88,7 +85,7 @@
                         <select class="form-select" id="urun" name="Urun">
                             @foreach (var item in ViewBag.urunList)
                             {
-                                if (item.IsActive == true && item.UrunUser == (short)Session["userID"])
+                                if (item.IsActive == true)
                                 {
                                     <option value="@item.UrunID">@item.UrunAd</option>
                                 }
@@ -100,7 +97,7 @@
                         <select class="form-select" id="musteri" name="Musteri">
                             @foreach (var item in ViewBag.musteriList)
                             {
-                                if (item.IsActive == true && item.MusteriUser == (short)Session["userID"])
+                                if (item.IsActive == true)
                                 {
                                     <option value="@item.MusteriID">@item.MusteriAd @item.MusteriSoyad</option>
                                 }

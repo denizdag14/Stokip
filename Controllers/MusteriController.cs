@@ -14,9 +14,10 @@ namespace POStock.Controllers
         {
             if (Session["userID"] == null)
             {
-                Response.Redirect(Url.Action("UserIndex", "User"));
+                return RedirectToAction("UserIndex", "User");
             }
-            var musteriList = db.MUSTERI.ToList();
+            short userID = (short)Session["userID"];
+            var musteriList = db.MUSTERI.Where(u => u.MusteriUser == userID).ToList();
             return View(musteriList);
         }
 
